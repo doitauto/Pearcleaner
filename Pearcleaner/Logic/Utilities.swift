@@ -846,8 +846,8 @@ func formatBytes(_ bytes: Int64) -> String {
 }
 
 // MARK: - Unified Privileged Command Execution
-/// Unified wrapper for executing privileged commands with automatic fallback
-/// Tries helper tool first if installed, falls back to Authorization Services (password prompt)
+/// Unified wrapper for executing privileged commands through the signed helper tool.
+/// Authorization Services are unavailable to Mac App Store sandboxed builds.
 func runSUCommand(
     _ command: String,
     errorContext: String? = nil,
@@ -874,8 +874,13 @@ func runSUCommand(
         }
     }
 
+    #if APP_STORE_SANDBOX
+    let success = false
+    let output = String(localized: "Permission required. Enable in System Settings > Login Items.")
+    #else
     // Pattern 3: Fallback to Authorization Services (prompts for password)
     let (success, output) = performPrivilegedCommands(commands: command)
+    #endif
 
     // Log custom error if provided and command failed
     if !success, let context = errorContext {
