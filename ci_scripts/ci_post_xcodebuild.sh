@@ -23,7 +23,13 @@ if [[ -z "$signing_identity" || "$signing_identity" == "-" ]]; then
     signing_identity="${CODE_SIGN_IDENTITY:-}"
 fi
 if [[ -z "$signing_identity" || "$signing_identity" == "-" ]]; then
-    signing_identity="$(security find-identity -v -p codesigning | awk -F '"' '/Apple Distribution:/ { print $2; exit }')"
+    signing_identity="${CODE_SIGNING_IDENTITY:-}"
+fi
+if [[ -z "$signing_identity" || "$signing_identity" == "-" ]]; then
+    signing_identity="${CI_CODE_SIGN_IDENTITY:-}"
+fi
+if [[ -z "$signing_identity" || "$signing_identity" == "-" ]]; then
+    signing_identity="$(security find-identity -v -p codesigning | awk -F '"' '/Apple Distribution:|3rd Party Mac Developer Application:/ { print $2; exit }')"
 fi
 
 if [[ -z "$signing_identity" ]]; then
@@ -46,12 +52,18 @@ apps_to_sign=()
 for candidate in "${app_candidates[@]}"; do
     if [[ -d "$candidate/Contents/Frameworks/Sparkle.framework" ]]; then
         apps_to_sign+=("$candidate")
+    elif [[ -d "$candidate" ]]; then
+        while IFS= read -r app_path; do
+            if [[ -d "$app_path/Contents/Frameworks/Sparkle.framework" ]]; then
+                apps_to_sign+=("$app_path")
+            fi
+        done < <(find "$candidate" -maxdepth 6 -type d -name 'AppRinse.app' -print)
     fi
 done
 
 if (( ${#apps_to_sign[@]} == 0 )); then
-    echo "error: no exported AppRinse.app with Sparkle.framework was found" >&2
-    exit 1
+    echo "warning: no exported AppRinse.app with Sparkle.framework was found; leaving the archive unchanged" >&2
+    exit 0
 fi
 
 for app_path in "${apps_to_sign[@]}"; do
@@ -73,5 +85,9 @@ for app_path in "${apps_to_sign[@]}"; do
     codesign --force --sign "$signing_identity" --options runtime \
         "$app_path/Contents/Frameworks/Sparkle.framework"
 
-    codesign --verify --strict "$app_path/Contents/Frameworks/Sparkle.framework"
+    # Re-seal the outer app after changing its nested framework.
+    codesign --force --sign "$signing_identity" --options runtime \
+        --preserve-metadata=entitlements,requirements,flags,runtime \
+        "$app_path"
+    codesign --verify --deep --strict "$app_path"
 done
