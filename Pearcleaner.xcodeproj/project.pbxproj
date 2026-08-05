@@ -15,15 +15,15 @@
 		C72D03B52E4D3FB900ADC1B4 /* MainWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72D03B22E4D3FB900ADC1B4 /* MainWindow.swift */; };
 		C72FDCB92D6D089100DE7D56 /* UndoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72FDCB82D6D088A00DE7D56 /* UndoManager.swift */; };
 		C73545EB2D8496E000A3DC0C /* HelperToolManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73545EA2D8496DA00A3DC0C /* HelperToolManager.swift */; };
-		C73545F92D849B5700A3DC0C /* PearcleanerHelper in CopyFiles */ = {isa = PBXBuildFile; fileRef = C73545F02D849A1B00A3DC0C /* PearcleanerHelper */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		C73545FD2D84E5DD00A3DC0C /* com.doitauto.PearcleanerSentinel.plist in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7B3AB072D83900B00D829C5 /* com.doitauto.PearcleanerSentinel.plist */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		C73545F92D849B5700A3DC0C /* AppRinseHelper in CopyFiles */ = {isa = PBXBuildFile; fileRef = C73545F02D849A1B00A3DC0C /* AppRinseHelper */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		C73545FD2D84E5DD00A3DC0C /* com.doitauto.AppRinseSentinel.plist in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7B3AB072D83900B00D829C5 /* com.doitauto.AppRinseSentinel.plist */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		C739C3382EB027A9003639C6 /* askpass.sh in Resources */ = {isa = PBXBuildFile; fileRef = C739C3372EB027A9003639C6 /* askpass.sh */; };
 		C73AE1922EC69A81009CAC42 /* GlobalConsoleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73AE1912EC69A81009CAC42 /* GlobalConsoleManager.swift */; };
 		C74206E52E79E47400BDDB6A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C74206E42E79E47400BDDB6A /* Assets.xcassets */; };
 		C74422412E4936750002D277 /* DaemonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74422402E4936700002D277 /* DaemonView.swift */; };
 		C74422432E494D830002D277 /* PackageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74422422E494D7E0002D277 /* PackageView.swift */; };
 		C74FDC632BCD833D00B8960F /* Conditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74FDC622BCD833D00B8960F /* Conditions.swift */; };
-		C7575D392B0182DE006A600A /* PearcleanerSentinel in CopyFiles */ = {isa = PBXBuildFile; fileRef = C728930F2AFD51EA00C8C1CD /* PearcleanerSentinel */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		C7575D392B0182DE006A600A /* AppRinseSentinel in CopyFiles */ = {isa = PBXBuildFile; fileRef = C728930F2AFD51EA00C8C1CD /* AppRinseSentinel */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		C75AED0E2EC259A900824CCD /* DeleteHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75AED0D2EC259A900824CCD /* DeleteHistoryView.swift */; };
 		C75AED102EC259C800824CCD /* UndoHistoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75AED0F2EC259C800824CCD /* UndoHistoryManager.swift */; };
 		C76EDCD62C45DC82000CF29D /* AlinFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = C76EDCD52C45DC82000CF29D /* AlinFoundation */; };
@@ -112,8 +112,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 6;
 			files = (
-				C73545F92D849B5700A3DC0C /* PearcleanerHelper in CopyFiles */,
-				C7575D392B0182DE006A600A /* PearcleanerSentinel in CopyFiles */,
+				C73545F92D849B5700A3DC0C /* AppRinseHelper in CopyFiles */,
+				C7575D392B0182DE006A600A /* AppRinseSentinel in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -123,7 +123,7 @@
 			dstPath = Contents/Library/LaunchAgents;
 			dstSubfolderSpec = 1;
 			files = (
-				C73545FD2D84E5DD00A3DC0C /* com.doitauto.PearcleanerSentinel.plist in CopyFiles */,
+				C73545FD2D84E5DD00A3DC0C /* com.doitauto.AppRinseSentinel.plist in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,12 +132,12 @@
 /* Begin PBXFileReference section */
 		C7149E782E68DE7E00A15356 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		C72893042AFD42E600C8C1CD /* DeepLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLink.swift; sourceTree = "<group>"; };
-		C728930F2AFD51EA00C8C1CD /* PearcleanerSentinel */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = PearcleanerSentinel; sourceTree = BUILT_PRODUCTS_DIR; };
+		C728930F2AFD51EA00C8C1CD /* AppRinseSentinel */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = AppRinseSentinel; sourceTree = BUILT_PRODUCTS_DIR; };
 		C72893112AFD51EA00C8C1CD /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		C72D03B22E4D3FB900ADC1B4 /* MainWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindow.swift; sourceTree = "<group>"; };
 		C72FDCB82D6D088A00DE7D56 /* UndoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoManager.swift; sourceTree = "<group>"; };
 		C73545EA2D8496DA00A3DC0C /* HelperToolManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperToolManager.swift; sourceTree = "<group>"; };
-		C73545F02D849A1B00A3DC0C /* PearcleanerHelper */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = PearcleanerHelper; sourceTree = BUILT_PRODUCTS_DIR; };
+		C73545F02D849A1B00A3DC0C /* AppRinseHelper */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = AppRinseHelper; sourceTree = BUILT_PRODUCTS_DIR; };
 		C739C3372EB027A9003639C6 /* askpass.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = askpass.sh; sourceTree = "<group>"; };
 		C73AE1912EC69A81009CAC42 /* GlobalConsoleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalConsoleManager.swift; sourceTree = "<group>"; };
 		C74206E42E79E47400BDDB6A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -150,7 +150,7 @@
 		C77020282EA94D0A00240D58 /* FuzzySearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuzzySearch.swift; sourceTree = "<group>"; };
 		C770B6EC2E78DF9D005A0ABD /* Glass.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = Glass.icon; sourceTree = "<group>"; };
 		C770D7DA2CE7C9A100B3492A /* DevelopmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevelopmentView.swift; sourceTree = "<group>"; };
-		C77B90002AF18E2E009CC655 /* Pearcleaner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pearcleaner.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C77B90002AF18E2E009CC655 /* AppRinse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppRinse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C77B90032AF18E2E009CC655 /* PearcleanerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PearcleanerApp.swift; sourceTree = "<group>"; };
 		C77B90142AF18E7C009CC655 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C77B90152AF19377009CC655 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
@@ -169,7 +169,7 @@
 		C78FF5E22EC1B1E100FC610A /* KeychainPasswordManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainPasswordManager.swift; sourceTree = "<group>"; };
 		C7A2A4D52DDB957D006E05E4 /* CLI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLI.swift; sourceTree = "<group>"; };
 		C7A6DBF02C9DD27200CFA042 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		C7B3AB072D83900B00D829C5 /* com.doitauto.PearcleanerSentinel.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = com.doitauto.PearcleanerSentinel.plist; sourceTree = "<group>"; };
+		C7B3AB072D83900B00D829C5 /* com.doitauto.AppRinseSentinel.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = com.doitauto.AppRinseSentinel.plist; sourceTree = "<group>"; };
 		C7BB99282E8AF1CB007BBB81 /* PluginsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginsView.swift; sourceTree = "<group>"; };
 		C7BB992E2E8B225F007BBB81 /* FileSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSearchView.swift; sourceTree = "<group>"; };
 		C7C90DD22DA81C590056769A /* Lipo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lipo.swift; sourceTree = "<group>"; };
@@ -222,13 +222,13 @@
 		C73545FC2D849B7E00A3DC0C /* PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
 			attributesByRelativePath = {
-				com.doitauto.Pearcleaner.PearcleanerHelper.plist = (
+				com.doitauto.AppRinse.AppRinseHelper.plist = (
 					CodeSignOnCopy,
 				);
 			};
 			buildPhase = C73545FA2D849B6900A3DC0C /* CopyFiles */;
 			membershipExceptions = (
-				com.doitauto.Pearcleaner.PearcleanerHelper.plist,
+				com.doitauto.AppRinse.AppRinseHelper.plist,
 			);
 		};
 /* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
@@ -325,7 +325,7 @@
 		C72893102AFD51EA00C8C1CD /* PearcleanerSentinel */ = {
 			isa = PBXGroup;
 			children = (
-				C7B3AB072D83900B00D829C5 /* com.doitauto.PearcleanerSentinel.plist */,
+				C7B3AB072D83900B00D829C5 /* com.doitauto.AppRinseSentinel.plist */,
 				C78733BC2E674496008615F2 /* FileWatcher.swift */,
 				C72893112AFD51EA00C8C1CD /* main.swift */,
 			);
@@ -369,10 +369,10 @@
 		C77B90012AF18E2E009CC655 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C77B90002AF18E2E009CC655 /* Pearcleaner.app */,
-				C728930F2AFD51EA00C8C1CD /* PearcleanerSentinel */,
+				C77B90002AF18E2E009CC655 /* AppRinse.app */,
+				C728930F2AFD51EA00C8C1CD /* AppRinseSentinel */,
 				C78121632BC892A000BE06BD /* FinderOpen.appex */,
-				C73545F02D849A1B00A3DC0C /* PearcleanerHelper */,
+				C73545F02D849A1B00A3DC0C /* AppRinseHelper */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -443,8 +443,8 @@
 			name = PearcleanerSentinel;
 			packageProductDependencies = (
 			);
-			productName = PeakPurgeMonitor;
-			productReference = C728930F2AFD51EA00C8C1CD /* PearcleanerSentinel */;
+			productName = AppRinseSentinel;
+			productReference = C728930F2AFD51EA00C8C1CD /* AppRinseSentinel */;
 			productType = "com.apple.product-type.tool";
 		};
 		C73545EF2D849A1B00A3DC0C /* PearcleanerHelper */ = {
@@ -467,8 +467,8 @@
 			packageProductDependencies = (
 				C7C90DDD2DA8221B0056769A /* AlinFoundation */,
 			);
-			productName = PearcleanerHelper;
-			productReference = C73545F02D849A1B00A3DC0C /* PearcleanerHelper */;
+			productName = AppRinseHelper;
+			productReference = C73545F02D849A1B00A3DC0C /* AppRinseHelper */;
 			productType = "com.apple.product-type.tool";
 		};
 		C77B8FFF2AF18E2E009CC655 /* Pearcleaner */ = {
@@ -511,8 +511,8 @@
 				C7A2A4D82DDB95C4006E05E4 /* ArgumentParser */,
 				C707E2932EAF217200AAD817 /* Sparkle */,
 			);
-			productName = PeakPurge;
-			productReference = C77B90002AF18E2E009CC655 /* Pearcleaner.app */;
+			productName = AppRinse;
+			productReference = C77B90002AF18E2E009CC655 /* AppRinse.app */;
 			productType = "com.apple.product-type.application";
 		};
 		C78121622BC892A000BE06BD /* FinderOpen */ = {
@@ -735,8 +735,8 @@
 				INSTALL_PATH = "";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = "$(APP_VERSION)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.doitauto.PearcleanerSentinel;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.doitauto.AppRinseSentinel;
+				PRODUCT_NAME = AppRinseSentinel;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -760,8 +760,8 @@
 				INSTALL_PATH = "";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = "$(APP_VERSION)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.doitauto.PearcleanerSentinel;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.doitauto.AppRinseSentinel;
+				PRODUCT_NAME = AppRinseSentinel;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -781,8 +781,8 @@
 				INSTALL_PATH = "";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = "$(APP_VERSION)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.doitauto.Pearcleaner.PearcleanerHelper;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.doitauto.AppRinse.AppRinseHelper;
+				PRODUCT_NAME = AppRinseHelper;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -804,8 +804,8 @@
 				INSTALL_PATH = "";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = "$(APP_VERSION)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.doitauto.Pearcleaner.PearcleanerHelper;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.doitauto.AppRinse.AppRinseHelper;
+				PRODUCT_NAME = AppRinseHelper;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
@@ -980,11 +980,11 @@
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Pearcleaner/Resources/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Pearcleaner;
+				INFOPLIST_KEY_CFBundleDisplayName = AppRinse;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				INFOPLIST_KEY_NSSystemAdministrationUsageDescription = "Pearcleaner requires full disk access to be able to delete files in locations with no permission";
-				INFOPLIST_KEY_NSSystemExtensionUsageDescription = "Pearcleaner requires this permission for the Finder Extension";
+				INFOPLIST_KEY_NSSystemAdministrationUsageDescription = "AppRinse requires full disk access to delete files in protected locations";
+				INFOPLIST_KEY_NSSystemExtensionUsageDescription = "AppRinse requires this permission for the Finder extension";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -994,8 +994,8 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "";
 				OTHER_SWIFT_FLAGS = "-Xcc -fmodule-map-file=$(SRCROOT)/Pearcleaner/Logic/AppsUpdater/PrivateFrameworks/CommerceKit/module.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/Pearcleaner/Logic/AppsUpdater/PrivateFrameworks/StoreFoundation/module.modulemap";
-				PRODUCT_BUNDLE_IDENTIFIER = com.doitauto.Pearcleaner;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.doitauto.AppRinse;
+				PRODUCT_NAME = AppRinse;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				REGISTER_APP_GROUPS = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1037,11 +1037,11 @@
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Pearcleaner/Resources/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Pearcleaner;
+				INFOPLIST_KEY_CFBundleDisplayName = AppRinse;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				INFOPLIST_KEY_NSSystemAdministrationUsageDescription = "Pearcleaner requires full disk access to be able to delete files in locations with no permission";
-				INFOPLIST_KEY_NSSystemExtensionUsageDescription = "Pearcleaner requires this permission for the Finder Extension";
+				INFOPLIST_KEY_NSSystemAdministrationUsageDescription = "AppRinse requires full disk access to delete files in protected locations";
+				INFOPLIST_KEY_NSSystemExtensionUsageDescription = "AppRinse requires this permission for the Finder extension";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -1050,8 +1050,8 @@
 				MARKETING_VERSION = "$(APP_VERSION)";
 				OTHER_LDFLAGS = "";
 				OTHER_SWIFT_FLAGS = "-Xcc -fmodule-map-file=$(SRCROOT)/Pearcleaner/Logic/AppsUpdater/PrivateFrameworks/CommerceKit/module.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/Pearcleaner/Logic/AppsUpdater/PrivateFrameworks/StoreFoundation/module.modulemap";
-				PRODUCT_BUNDLE_IDENTIFIER = com.doitauto.Pearcleaner;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.doitauto.AppRinse;
+				PRODUCT_NAME = AppRinse;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				REGISTER_APP_GROUPS = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1091,7 +1091,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = "$(APP_VERSION)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.doitauto.Pearcleaner.FinderOpen;
+				PRODUCT_BUNDLE_IDENTIFIER = com.doitauto.AppRinse.FinderOpen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				REGISTER_APP_GROUPS = YES;
@@ -1128,7 +1128,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = "$(APP_VERSION)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.doitauto.Pearcleaner.FinderOpen;
+				PRODUCT_BUNDLE_IDENTIFIER = com.doitauto.AppRinse.FinderOpen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				REGISTER_APP_GROUPS = YES;

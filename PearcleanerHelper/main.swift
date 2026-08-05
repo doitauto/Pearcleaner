@@ -95,7 +95,7 @@ class HelperToolDelegate: NSObject, NSXPCListenerDelegate, HelperToolProtocol {
 
 // Set up and start the XPC listener.
 let delegate = HelperToolDelegate()
-let listener = NSXPCListener(machServiceName: "com.doitauto.Pearcleaner.PearcleanerHelper")
+let listener = NSXPCListener(machServiceName: "com.doitauto.AppRinse.AppRinseHelper")
 listener.delegate = delegate
 listener.resume()
 RunLoop.main.run()

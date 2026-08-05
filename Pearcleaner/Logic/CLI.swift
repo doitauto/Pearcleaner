@@ -8,8 +8,8 @@ import UniformTypeIdentifiers
 // Main command structure
 struct PearCLI: ParsableCommand {
     static var configuration = CommandConfiguration(
-        commandName: "pear",
-        abstract: "Command-line interface for the Pearcleaner app",
+        commandName: "apprinse",
+        abstract: "Command-line interface for the AppRinse app",
         subcommands: [
 //            Run.self,
             List.self,
@@ -204,7 +204,7 @@ struct PearCLI: ParsableCommand {
         static var configuration = CommandConfiguration(
             commandName: "remove-orphaned",
             abstract:
-                "Remove ALL orphaned files (To ignore files, add them to the exception list within Pearcleaner settings)"
+                "Remove ALL orphaned files (To ignore files, add them to the exception list within AppRinse settings)"
         )
 
         func run() throws {
@@ -387,12 +387,12 @@ struct PearCLI: ParsableCommand {
         private func obtainPassword() -> String? {
             // Check if Pearcleaner main app is running
             let runningApps = NSWorkspace.shared.runningApplications
-            let pearcleanerRunning = runningApps.contains { app in
-                app.bundleIdentifier == "com.doitauto.Pearcleaner" &&
+            let appRinseRunning = runningApps.contains { app in
+                app.bundleIdentifier == "com.doitauto.AppRinse" &&
                 app.processIdentifier != ProcessInfo.processInfo.processIdentifier
             }
 
-            if pearcleanerRunning {
+            if appRinseRunning {
                 return requestPasswordFromMainApp()
             } else {
                 _ = NSApplication.shared
@@ -409,7 +409,7 @@ struct PearCLI: ParsableCommand {
 
             let observerQueue = OperationQueue()
             let observer = center.addObserver(
-                forName: NSNotification.Name("com.doitauto.Pearcleaner.passwordResponse"),
+                forName: NSNotification.Name("com.doitauto.AppRinse.passwordResponse"),
                 object: nil,
                 queue: observerQueue
             ) { notification in
@@ -422,7 +422,7 @@ struct PearCLI: ParsableCommand {
             }
 
             center.postNotificationName(
-                NSNotification.Name("com.doitauto.Pearcleaner.passwordRequest"),
+                NSNotification.Name("com.doitauto.AppRinse.passwordRequest"),
                 object: nil,
                 userInfo: [
                     "requestId": requestId,
@@ -444,7 +444,7 @@ struct PearCLI: ParsableCommand {
         // MARK: - Show Password Dialog
         private static func showPasswordDialog(message: String) -> String? {
             let alert = NSAlert()
-            alert.messageText = "Pearcleaner"
+            alert.messageText = "AppRinse"
             alert.informativeText = message
             alert.alertStyle = .informational
             alert.addButton(withTitle: "OK")

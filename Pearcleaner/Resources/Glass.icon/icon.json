@@ -34,13 +34,13 @@
             }
           ],
           "hidden" : false,
-          "image-name" : "pear.heic",
-          "name" : "pear",
+          "image-name" : "apprinse.png",
+          "name" : "apprinse",
           "position" : {
-            "scale" : 1.5,
+            "scale" : 1.0,
             "translation-in-points" : [
-              11.3046875,
-              3.296875
+              0,
+              0
             ]
           }
         }

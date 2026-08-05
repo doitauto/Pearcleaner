@@ -12,7 +12,7 @@ import Security
 class KeychainPasswordManager {
     static let shared = KeychainPasswordManager()
 
-    private let service = "com.doitauto.Pearcleaner.SudoPassword"
+    private let service = "com.doitauto.AppRinse.SudoPassword"
     private let account: String
 
     private init() {

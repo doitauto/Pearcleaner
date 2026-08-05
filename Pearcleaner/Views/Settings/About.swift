@@ -58,7 +58,7 @@ struct AboutSettingsTab: View {
                         }
                         Spacer()
                         Button {
-                            NSWorkspace.shared.open(URL(string: "https://github.com/alienator88/Pearcleaner/issues/new/choose")!)
+                            NSWorkspace.shared.open(URL(string: "https://github.com/doitauto/Pearcleaner/issues/new/choose")!)
                         } label: {
                             Text("View")
                         }
@@ -144,7 +144,7 @@ struct AboutSettingsTab: View {
         let savePanel = NSSavePanel()
         savePanel.directoryURL = FileManager.default.urls(for: .downloadsDirectory, in: .userDomainMask).first
         savePanel.allowedContentTypes = [.json]
-        savePanel.nameFieldStringValue = "PearcleanerSettings.json"
+        savePanel.nameFieldStringValue = "AppRinseSettings.json"
         savePanel.begin { response in
             guard response == .OK, let url = savePanel.url else { return }
             try? jsonData.write(to: url)

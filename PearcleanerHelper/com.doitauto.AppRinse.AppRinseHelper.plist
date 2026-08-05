@@ -3,17 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>Label</key>
-	<string>com.doitauto.Pearcleaner.PearcleanerHelper</string>
+	<string>com.doitauto.AppRinse.AppRinseHelper</string>
 	<key>BundleProgram</key>
-	<string>Contents/MacOS/PearcleanerHelper</string>
+	<string>Contents/MacOS/AppRinseHelper</string>
 	<key>MachServices</key>
 	<dict>
-		<key>com.doitauto.Pearcleaner.PearcleanerHelper</key>
+		<key>com.doitauto.AppRinse.AppRinseHelper</key>
 		<true/>
 	</dict>
 	<key>AssociatedBundleIdentifiers</key>
 	<array>
-		<string>com.doitauto.Pearcleaner</string>
+		<string>com.doitauto.AppRinse</string>
 	</array>
 </dict>
 </plist>

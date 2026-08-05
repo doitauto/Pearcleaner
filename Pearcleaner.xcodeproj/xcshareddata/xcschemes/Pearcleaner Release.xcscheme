@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "C77B8FFF2AF18E2E009CC655"
-               BuildableName = "Pearcleaner.app"
+               BuildableName = "AppRinse.app"
                BlueprintName = "Pearcleaner"
                ReferencedContainer = "container:Pearcleaner.xcodeproj">
             </BuildableReference>
@@ -44,7 +44,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C77B8FFF2AF18E2E009CC655"
-            BuildableName = "Pearcleaner.app"
+            BuildableName = "AppRinse.app"
             BlueprintName = "Pearcleaner"
             ReferencedContainer = "container:Pearcleaner.xcodeproj">
          </BuildableReference>
@@ -61,7 +61,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C77B8FFF2AF18E2E009CC655"
-            BuildableName = "Pearcleaner.app"
+            BuildableName = "AppRinse.app"
             BlueprintName = "Pearcleaner"
             ReferencedContainer = "container:Pearcleaner.xcodeproj">
          </BuildableReference>

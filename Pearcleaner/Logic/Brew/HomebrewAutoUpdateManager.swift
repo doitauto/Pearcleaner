@@ -103,8 +103,8 @@ class HomebrewAutoUpdateManager: ObservableObject {
     var originalRunUpgrade: Bool = false
     var originalRunCleanup: Bool = false
 
-    private let plistPath = "\(NSHomeDirectory())/Library/LaunchAgents/com.doitauto.Pearcleaner.homebrew-autoupdate.plist"
-    private let label = "com.doitauto.Pearcleaner.homebrew-autoupdate"
+    private let plistPath = "\(NSHomeDirectory())/Library/LaunchAgents/com.doitauto.AppRinse.homebrew-autoupdate.plist"
+    private let label = "com.doitauto.AppRinse.homebrew-autoupdate"
     let logPath = "/tmp/homebrew-autoupdate.log"
 
     private init() {

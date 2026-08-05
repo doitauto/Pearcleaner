@@ -25,10 +25,10 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>com.doitauto.Pearcleaner</string>
+			<string>com.doitauto.AppRinse</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>pear</string>
+				<string>apprinse</string>
 			</array>
 		</dict>
 	</array>
@@ -38,7 +38,7 @@
 			<key>NSMenuItem</key>
 			<dict>
 				<key>default</key>
-				<string>Uninstall with Pearcleaner</string>
+				<string>Uninstall with AppRinse</string>
 			</dict>
 			<key>NSMessage</key>
 			<string>handleServiceRequest</string>

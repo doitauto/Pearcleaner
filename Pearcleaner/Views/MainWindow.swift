@@ -121,7 +121,7 @@ struct MainWindow: View {
                         VStack(spacing: PearMetrics.spacingXS) {
                             Text("Drop applications to inspect")
                                 .font(.title2.weight(.semibold))
-                            Text("Pearcleaner will find the application and its related files.")
+                            Text("AppRinse will find the application and its related files.")
                                 .font(.callout)
                                 .foregroundStyle(ThemeColors.shared(for: colorScheme).secondaryText)
                         }
@@ -159,7 +159,7 @@ struct MainWindow: View {
         )
         .background(modernWindowBackground)
         .frame(minWidth: 900, minHeight: 650)
-        .handlesExternalEvents(preferring: Set(arrayLiteral: "pear"), allowing: Set(arrayLiteral: "*"))
+        .handlesExternalEvents(preferring: Set(arrayLiteral: "apprinse"), allowing: Set(arrayLiteral: "*"))
         .handleFileDrop(
             updater: updater,
             fsm: fsm,

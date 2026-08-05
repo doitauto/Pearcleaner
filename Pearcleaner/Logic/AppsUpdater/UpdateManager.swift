@@ -399,7 +399,7 @@ class UpdateManager: ObservableObject {
         // This significantly improves performance for regular update checks
         if forceReload || debugLogging || AppState.shared.sortedApps.isEmpty {
             // Flush bundle caches (useful for testing with fake versions in debug mode)
-            Pearcleaner.flushBundleCaches(for: AppState.shared.sortedApps)
+            AppRinse.flushBundleCaches(for: AppState.shared.sortedApps)
 
             // Reload apps from disk to detect newly installed/uninstalled apps
             let folderPaths = await MainActor.run {
@@ -943,9 +943,9 @@ class UpdateManager: ObservableObject {
 
         // Only flush cache for the app that was just updated (or all if none specified)
         if let app = updatedApp {
-            Pearcleaner.flushBundleCaches(for: [app])
+            AppRinse.flushBundleCaches(for: [app])
         } else {
-            Pearcleaner.flushBundleCaches(for: AppState.shared.sortedApps)
+            AppRinse.flushBundleCaches(for: AppState.shared.sortedApps)
         }
 
         await loadAppsAsync(folderPaths: folderPaths, useStreaming: false)

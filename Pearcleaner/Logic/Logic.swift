@@ -798,7 +798,7 @@ func manageFinderPlugin(install: Bool) {
     let task = Process()
     task.launchPath = "/usr/bin/pluginkit"
 
-    task.arguments = ["-e", "\(install ? "use" : "ignore")", "-i", "com.doitauto.Pearcleaner.FinderOpen"]
+    task.arguments = ["-e", "\(install ? "use" : "ignore")", "-i", "com.doitauto.AppRinse.FinderOpen"]
 
     task.launch()
     task.waitUntilExit()
@@ -1201,7 +1201,7 @@ func exportDebugInfo(appState: AppState) {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd_HH-mm-ss"
             let timestamp = dateFormatter.string(from: Date())
-            filename = "PearcleanerDiagnostics-\(timestamp).txt"
+            filename = "AppRinseDiagnostics-\(timestamp).txt"
         }
 
         let filePath = selectedFolder.appendingPathComponent(filename)
@@ -1366,19 +1366,19 @@ func uninstallPearcleaner(appState: AppState, locations: Locations) {
 
 // --- Load Plist file with SMAppService ---
 func launchctl(load: Bool, completion: @escaping () -> Void = {}) {
-    let service = SMAppService.agent(plistName: "com.doitauto.PearcleanerSentinel.plist")
+    let service = SMAppService.agent(plistName: "com.doitauto.AppRinseSentinel.plist")
 
     if load {
         do {
             try service.register()
         } catch let error as NSError {
-            printOS("Error registering PearcleanerSentinel: \(error)")
+            printOS("Error registering AppRinseSentinel: \(error)")
         }
     } else {
         do {
             try service.unregister()
         } catch let error as NSError {
-            printOS("Error unregistering PearcleanerSentinel: \(error)")
+            printOS("Error unregistering AppRinseSentinel: \(error)")
         }
     }
 
@@ -1460,7 +1460,7 @@ func createTarArchive(appState: AppState) {
             let errorData = pipe.fileHandleForReading.readDataToEndOfFile()
             let errorMessage = String(data: errorData, encoding: .utf8) ?? "Unknown error"
             throw NSError(
-                domain: "com.doitauto.Pearcleaner.archiveExport",
+                domain: "com.doitauto.AppRinse.archiveExport",
                 code: Int(process.terminationStatus),
                 userInfo: [NSLocalizedDescriptionKey: errorMessage])
         }

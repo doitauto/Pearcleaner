@@ -10,7 +10,7 @@ import AppKit
 import OSLog
 
 private let logger = Logger(
-    subsystem: "com.doitauto.Pearcleaner",
+    subsystem: "com.doitauto.AppRinse",
     category: "Sentinel"
 )
 
@@ -48,11 +48,11 @@ func stopGlobalFileWatcher() {
 
 func setupNotificationListener() {
     let notificationCenter = DistributedNotificationCenter.default()
-    notificationCenter.addObserver(forName: Notification.Name("Pearcleaner.StartFileWatcher"), object: nil, queue: nil) { _ in
+    notificationCenter.addObserver(forName: Notification.Name("AppRinse.StartFileWatcher"), object: nil, queue: nil) { _ in
         logger.debug("Received start notification")
         startGlobalFileWatcher()
     }
-    notificationCenter.addObserver(forName: Notification.Name("Pearcleaner.StopFileWatcher"), object: nil, queue: nil) { _ in
+    notificationCenter.addObserver(forName: Notification.Name("AppRinse.StopFileWatcher"), object: nil, queue: nil) { _ in
         logger.debug("Received stop notification")
         stopGlobalFileWatcher()
     }
@@ -78,13 +78,13 @@ func checkApp(file: String) {
         return
     }
 
-    guard appBundle.bundleIdentifier != "com.doitauto.Pearcleaner" else {
-        logger.debug("Ignoring Pearcleaner's own app bundle")
+    guard appBundle.bundleIdentifier != "com.doitauto.AppRinse" else {
+        logger.debug("Ignoring AppRinse's own app bundle")
         return
     }
 
     var components = URLComponents()
-    components.scheme = "pear"
+    components.scheme = "apprinse"
     components.host = "openApp"
     components.queryItems = [URLQueryItem(name: "path", value: file)]
 
@@ -94,9 +94,9 @@ func checkApp(file: String) {
     }
 
     if NSWorkspace.shared.open(deepLink) {
-        logger.notice("Opened Pearcleaner for a trashed app bundle: \(file, privacy: .private(mask: .hash))")
+        logger.notice("Opened AppRinse for a trashed app bundle: \(file, privacy: .private(mask: .hash))")
     } else {
-        logger.error("Failed to open Pearcleaner for path: \(file, privacy: .private(mask: .hash))")
+        logger.error("Failed to open AppRinse for path: \(file, privacy: .private(mask: .hash))")
     }
 }
 

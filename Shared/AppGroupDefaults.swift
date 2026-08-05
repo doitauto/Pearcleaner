@@ -8,7 +8,7 @@
 import Foundation
 
 extension UserDefaults {
-    static let appGroup = UserDefaults(suiteName: "group.com.doitauto.Pearcleaner")!
+    static let appGroup = UserDefaults(suiteName: "group.com.doitauto.AppRinse")!
 
     struct Keys {
         static let showAppIconInMenu = "showAppIconInMenu"

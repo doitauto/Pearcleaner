@@ -33,9 +33,9 @@ func playTrashSound(undo: Bool = false) {
 }
 
 
-// Check if pear symlink exists
+// Check if the AppRinse CLI symlink exists
 func checkCLISymlink() -> Bool {
-    let filePath = "/usr/local/bin/pear"
+    let filePath = "/usr/local/bin/apprinse"
     let fileManager = FileManager.default
 
     guard fileManager.fileExists(atPath: filePath) else { return false }
@@ -48,18 +48,27 @@ func checkCLISymlink() -> Bool {
     }
 }
 
-// Fix legacy pearcleaner symlink if it exists
+// Replace legacy Pearcleaner CLI symlinks with the AppRinse command
 func fixLegacySymlink() {
-    let legacyPath = "/usr/local/bin/pearcleaner"
     let fileManager = FileManager.default
-    if fileManager.fileExists(atPath: legacyPath) {
-        manageSymlink(install: false, symlinkName: "pearcleaner")
-        manageSymlink(install: true, symlinkName: "pear")
+    let legacyNames = ["pear", "pearcleaner"]
+    var foundLegacySymlink = false
+
+    for legacyName in legacyNames {
+        let legacyPath = "/usr/local/bin/\(legacyName)"
+        if fileManager.fileExists(atPath: legacyPath) {
+            foundLegacySymlink = true
+            manageSymlink(install: false, symlinkName: legacyName)
+        }
+    }
+
+    if foundLegacySymlink {
+        manageSymlink(install: true, symlinkName: "apprinse")
     }
 }
 
 // Install/uninstall symlink for CLI
-func manageSymlink(install: Bool, symlinkName: String = "pear") {
+func manageSymlink(install: Bool, symlinkName: String = "apprinse") {
     @AppStorage("settings.general.cli") var isCLISymlinked = false
 
     guard let appPath = Bundle.main.executablePath else {
@@ -733,11 +742,11 @@ extension String {
 }
 
 func sendStartNotificationFW() {
-    DistributedNotificationCenter.default().postNotificationName(Notification.Name("Pearcleaner.StartFileWatcher"), object: nil, userInfo: nil, deliverImmediately: true)
+    DistributedNotificationCenter.default().postNotificationName(Notification.Name("AppRinse.StartFileWatcher"), object: nil, userInfo: nil, deliverImmediately: true)
 }
 
 func sendStopNotificationFW() {
-    DistributedNotificationCenter.default().postNotificationName(Notification.Name("Pearcleaner.StopFileWatcher"), object: nil, userInfo: nil, deliverImmediately: true)
+    DistributedNotificationCenter.default().postNotificationName(Notification.Name("AppRinse.StopFileWatcher"), object: nil, userInfo: nil, deliverImmediately: true)
 }
 
 func formatRelativeTime(_ date: Date) -> String {

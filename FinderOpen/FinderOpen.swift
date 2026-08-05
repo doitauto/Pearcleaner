@@ -26,7 +26,7 @@ class FinderOpen: FIFinderSync {
             if let selectedItemURLs = FIFinderSyncController.default().selectedItemURLs(),
                selectedItemURLs.count == 1, selectedItemURLs.first?.pathExtension == "app" {
                 // Add menu item if the selected item is a .app file
-                let menuItem = NSMenuItem(title: String(localized: "Pearcleaner Uninstall"), action: #selector(openInMyApp), keyEquivalent: "")
+                let menuItem = NSMenuItem(title: String(localized: "Uninstall with AppRinse"), action: #selector(openInMyApp), keyEquivalent: "")
                 // Add icon if enabled in main app
                 if UserDefaults.showAppIconInMenu {
                     if let appIcon = NSApp.applicationIconImage {
@@ -56,7 +56,15 @@ class FinderOpen: FIFinderSync {
         // Consider only the first selected item
         let firstSelectedItem = selectedItems[0]
         let path = firstSelectedItem.path
-        NSWorkspace.shared.open(URL(string: "pear://com.doitauto.Pearcleaner?path=\(path)")!)
+        guard
+            let url = URL(
+                string: "apprinse://com.doitauto.AppRinse?path=\(path)"
+            )
+        else {
+            return
+        }
+
+        NSWorkspace.shared.open(url)
 
     }
 

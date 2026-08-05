@@ -22,7 +22,7 @@ class PasswordRequestHandler {
         DistributedNotificationCenter.default().addObserver(
             self,
             selector: #selector(handlePasswordRequest(_:)),
-            name: NSNotification.Name("com.doitauto.Pearcleaner.passwordRequest"),
+            name: NSNotification.Name("com.doitauto.AppRinse.passwordRequest"),
             object: nil
         )
     }
@@ -40,7 +40,7 @@ class PasswordRequestHandler {
 
             // Send response back
             DistributedNotificationCenter.default().postNotificationName(
-                NSNotification.Name("com.doitauto.Pearcleaner.passwordResponse"),
+                NSNotification.Name("com.doitauto.AppRinse.passwordResponse"),
                 object: nil,
                 userInfo: [
                     "requestId": requestId,
@@ -53,7 +53,7 @@ class PasswordRequestHandler {
 
     private func showPasswordDialog(message: String) -> String? {
         let alert = NSAlert()
-        alert.messageText = "Pearcleaner"
+        alert.messageText = "AppRinse"
         alert.informativeText = message
         alert.alertStyle = .informational
         alert.addButton(withTitle: "OK")
