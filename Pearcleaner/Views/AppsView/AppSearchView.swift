@@ -24,40 +24,56 @@ struct AppSearchView: View {
     @State private var dimensionStart: Double?
 
     var body: some View {
+        let apps = filteredApps
 
         VStack(alignment: .center, spacing: 0) {
             if appState.sortedApps.isEmpty {
-                VStack {
-                    Spacer()
-                    Text("No apps found")
-                        .foregroundStyle(ThemeColors.shared(for: colorScheme).secondaryText)
-                        .font(.callout)
-                    Spacer()
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                sidebarEmptyState(
+                    title: String(localized: "No apps found"),
+                    message: String(localized: "Check the configured application folders in Settings."),
+                    systemImage: "macwindow.badge.plus"
+                )
             } else {
+                VStack(alignment: .leading, spacing: PearMetrics.spacingM) {
+                    HStack(alignment: .firstTextBaseline, spacing: PearMetrics.spacingS) {
+                        Text("Applications")
+                            .font(.headline)
+                            .foregroundStyle(ThemeColors.shared(for: colorScheme).primaryText)
 
-                SearchBarSidebar(search: $search)
-                    .padding()
-                    .padding(.top, 20)
-
-                if !filteredApps.isEmpty {
-                    AppsListView(
-                        search: $search, filteredApps: filteredApps, isGridMode: appState.isGridMode
-                    )
-                    .padding([.bottom, .horizontal], 5)
-                } else {
-                    VStack {
-                        Spacer()
-                        Text("No results")
+                        Text(apps.count, format: .number)
+                            .font(.caption.weight(.semibold))
+                            .monospacedDigit()
                             .foregroundStyle(ThemeColors.shared(for: colorScheme).secondaryText)
-                            .font(.title2)
+                            .padding(.horizontal, 7)
+                            .frame(minHeight: 19)
+                            .background(
+                                ThemeColors.shared(for: colorScheme).hoverSurface,
+                                in: Capsule(style: .continuous)
+                            )
+
                         Spacer()
                     }
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .accessibilityElement(children: .combine)
+
+                    SearchBarSidebar(search: $search)
                 }
+                .padding(.horizontal, PearMetrics.spacingM)
+                .padding(.top, 30)
+                .padding(.bottom, PearMetrics.spacingS)
 
-
+                if !apps.isEmpty {
+                    AppsListView(
+                        search: $search, filteredApps: apps, isGridMode: appState.isGridMode
+                    )
+                    .padding(.horizontal, PearMetrics.spacingS)
+                    .padding(.bottom, PearMetrics.spacingS)
+                } else {
+                    sidebarEmptyState(
+                        title: String(localized: "No results"),
+                        message: String(localized: "Try another application name."),
+                        systemImage: "magnifyingglass"
+                    )
+                }
             }
         }
         .onAppear {
@@ -98,6 +114,37 @@ struct AppSearchView: View {
                 .help("Right click to reset size")
         }
 
+    }
+
+    private func sidebarEmptyState(
+        title: String,
+        message: String,
+        systemImage: String
+    ) -> some View {
+        VStack(spacing: PearMetrics.spacingM) {
+            Spacer()
+
+            Image(systemName: systemImage)
+                .font(.system(size: 28, weight: .medium))
+                .symbolRenderingMode(.hierarchical)
+                .foregroundStyle(ThemeColors.shared(for: colorScheme).accent)
+
+            VStack(spacing: PearMetrics.spacingXS) {
+                Text(title)
+                    .font(.headline)
+                    .foregroundStyle(ThemeColors.shared(for: colorScheme).primaryText)
+
+                Text(message)
+                    .font(.caption)
+                    .foregroundStyle(ThemeColors.shared(for: colorScheme).secondaryText)
+                    .multilineTextAlignment(.center)
+            }
+
+            Spacer()
+        }
+        .padding(PearMetrics.spacingXL)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .accessibilityElement(children: .combine)
     }
 
     private var sidebarDragGesture: some Gesture {

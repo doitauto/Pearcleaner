@@ -13,12 +13,12 @@ public enum ControlGroupLevel: Int {
 }
 
 public struct ControlGroupMetrics {
-    static let primaryGroupRadius: Double = 14
-    static let secondaryGroupRadius: Double = 8
+    static let primaryGroupRadius: CGFloat = PearMetrics.radiusL
+    static let secondaryGroupRadius: CGFloat = PearMetrics.radiusS
 }
 
 public extension ControlGroupLevel {
-    var cornerRadius: Double {
+    var cornerRadius: CGFloat {
         switch self {
         case .primary: ControlGroupMetrics.primaryGroupRadius
         case .secondary: ControlGroupMetrics.secondaryGroupRadius
@@ -47,6 +47,10 @@ private struct ControlGroupChrome<Shape: InsettableShape>: ViewModifier {
 
     var dark: Bool { colorScheme == .dark }
 
+    private var theme: ThemeColors {
+        ThemeColors.shared(for: colorScheme)
+    }
+
     private var innerRimOpacity: Double {
         switch level {
         case .primary:
@@ -59,18 +63,18 @@ private struct ControlGroupChrome<Shape: InsettableShape>: ViewModifier {
     private var outerRimOpacity: Double {
         switch level {
         case .primary:
-            return dark ? 0.5 : 0.8
+            return dark ? 0.18 : 0.10
         case .secondary:
-            return dark ? 0.4 : 0.7
+            return dark ? 0.12 : 0.08
         }
     }
 
     private var shadowOpacity: Double {
         switch level {
         case .primary:
-            return dark ? 0.2 : 0.1
+            return dark ? 0.18 : 0.08
         case .secondary:
-            return dark ? 0.1 : 0.05
+            return dark ? 0.10 : 0.04
         }
     }
 
@@ -87,8 +91,11 @@ private struct ControlGroupChrome<Shape: InsettableShape>: ViewModifier {
         content
             .background(material, in: shape)
             .clipShape(shape)
-            .shadow(color: Color.black.opacity(outerRimOpacity), radius: 1, x: 0, y: 0)
-            .shadow(color: Color.black.opacity(shadowOpacity), radius: dark ? 8 : 10, x: 0, y: 0)
+            .overlay {
+                shape
+                    .strokeBorder(theme.separator.opacity(outerRimOpacity), lineWidth: 1)
+            }
+            .shadow(color: Color.black.opacity(shadowOpacity), radius: dark ? 6 : 8, x: 0, y: 2)
             .chromeBorder(shape: shape, highlightEnabled: true, rimEnabled: false, shadowEnabled: false, highlightIntensity: innerRimOpacity)
             .containerShape(shape)
     }

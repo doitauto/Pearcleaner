@@ -21,6 +21,7 @@ struct MainWindow: View {
     @EnvironmentObject var updater: Updater
     @EnvironmentObject var permissionManager: PermissionManagerLocal
     @Environment(\.colorScheme) var colorScheme
+    @Environment(\.accessibilityReduceMotion) private var accessibilityReduceMotion
     @AppStorage("settings.general.glass") private var glass: Bool = false
     @AppStorage("settings.general.sidebarWidth") private var sidebarWidth: Double = 265
     @AppStorage("settings.interface.animationEnabled") private var animationEnabled: Bool = true
@@ -107,20 +108,43 @@ struct MainWindow: View {
             // Drop overlay
             if isDraggingOver {
                 ZStack {
-                    ThemeColors.shared(for: colorScheme).primaryBG
+                    Rectangle()
+                        .fill(.regularMaterial)
                         .ignoresSafeArea()
 
-                    Image(systemName: "arrow.down")
-                        .font(.system(size: 100))
-                        .foregroundColor(ThemeColors.shared(for: colorScheme).primaryText)
-                        .padding(40)
-                        .background(
-                            RoundedRectangle(cornerRadius: 20)
-                                .strokeBorder(style: StrokeStyle(lineWidth: 5, dash: [10, 5]))
-                                .foregroundColor(ThemeColors.shared(for: colorScheme).primaryText)
-                        )
+                    VStack(spacing: PearMetrics.spacingL) {
+                        Image(systemName: "arrow.down.app.fill")
+                            .font(.system(size: 46, weight: .medium))
+                            .symbolRenderingMode(.hierarchical)
+                            .foregroundStyle(ThemeColors.shared(for: colorScheme).accent)
+
+                        VStack(spacing: PearMetrics.spacingXS) {
+                            Text("Drop applications to inspect")
+                                .font(.title2.weight(.semibold))
+                            Text("Pearcleaner will find the application and its related files.")
+                                .font(.callout)
+                                .foregroundStyle(ThemeColors.shared(for: colorScheme).secondaryText)
+                        }
+                    }
+                    .multilineTextAlignment(.center)
+                    .padding(PearMetrics.spacingXL * 2)
+                    .background(ThemeColors.shared(for: colorScheme).elevatedSurface)
+                    .clipShape(RoundedRectangle(cornerRadius: PearMetrics.radiusXL, style: .continuous))
+                    .overlay {
+                        RoundedRectangle(cornerRadius: PearMetrics.radiusXL, style: .continuous)
+                            .strokeBorder(
+                                ThemeColors.shared(for: colorScheme).accent.opacity(0.45),
+                                style: StrokeStyle(lineWidth: 1.5, dash: [7, 5])
+                            )
+                    }
+                    .shadow(
+                        color: ThemeColors.shared(for: colorScheme).windowShadow,
+                        radius: 24,
+                        y: 12
+                    )
                 }
-                .transition(.opacity)
+                .transition(.opacity.combined(with: .scale(scale: 0.98)))
+                .accessibilityElement(children: .combine)
             }
 
             // Badge overlay (unified overlay for all badge notifications)
@@ -129,7 +153,11 @@ struct MainWindow: View {
                 .zIndex(100)
 
         }
-        .background(backgroundView(color: ThemeColors.shared(for: colorScheme).primaryBG))
+        .animation(
+            .easeOut(duration: canAnimate ? PearMotion.standard : 0),
+            value: isDraggingOver
+        )
+        .background(modernWindowBackground)
         .frame(minWidth: 900, minHeight: 650)
         .handlesExternalEvents(preferring: Set(arrayLiteral: "pear"), allowing: Set(arrayLiteral: "*"))
         .handleFileDrop(
@@ -195,81 +223,23 @@ struct MainWindow: View {
         }
         .toolbar {
             TahoeToolbarItem(placement: .navigation, isGroup: true) {
-
-                // Page Selector
-                Menu {
-                    ForEach(CurrentPage.availablePages, id: \.self) { page in
-                        Button {
-                            // Animate only the page content transition
-                            withAnimation(.easeInOut(duration: animationEnabled ? 0.3 : 0)) {
-                                // Reset appInfo when changing pages
-                                if page == .applications {
-                                    appState.appInfo = .empty
-                                    appState.currentView = .empty
-                                }
-                            }
-
-                            // Change page immediately (no animation on toolbar icon)
-                            appState.currentPage = page
-
-                            // Hide tutorial when user interacts with menu
-                            if tutorialShown {
-                                tutorialShown = false
-                            }
-                        } label: {
-                            if page == .updater {
-                                HStack(spacing: 8) {
-                                    Image(systemName: page.icon)
-                                        .frame(width: 16)
-                                    if loadUpdatesOnStartup || updateManager.totalUpdateCount > 0 {
-                                        Text(page.title)
-                                            .foregroundStyle(ThemeColors.shared(for: colorScheme).primaryText)
-                                            .badge(updateManager.totalUpdateCount)
-                                    } else {
-                                        Text(page.title)
-                                            .foregroundStyle(ThemeColors.shared(for: colorScheme).primaryText)
-                                    }
-                                }
-                            } else {
-                                HStack(spacing: 8) {
-                                    Image(systemName: page.icon)
-                                        .frame(width: 16)
-                                    Text(page.title)
-                                        .foregroundStyle(ThemeColors.shared(for: colorScheme).primaryText)
-                                }
-                            }
-                        }
-                    }
-                } label: {
-                    HStack {
-                        Image(systemName: appState.currentPage.icon)
-                    }
-                }
-                .menuIndicator(.hidden)
+                utilitySwitcher
 
                 if tutorialShown {
-                    HStack {
-                        Image(systemName: "arrowshape.left.fill")
+                    Button {
+                        tutorialShown = false
+                    } label: {
                         Text("Switch Utilities")
+                            .font(.caption.weight(.medium))
+                            .padding(.horizontal, PearMetrics.spacingS)
+                            .padding(.vertical, PearMetrics.spacingXS)
+                            .background(
+                                ThemeColors.shared(for: colorScheme).accentSurface,
+                                in: Capsule(style: .continuous)
+                            )
                     }
                     .foregroundStyle(ThemeColors.shared(for: colorScheme).accent)
-                    .font(.caption)
-                    .padding(.horizontal, 8)
-                    .padding(.vertical, 4)
-                    .background(
-                        RoundedRectangle(cornerRadius: 6)
-                            .fill(ThemeColors.shared(for: colorScheme).secondaryBG)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 6)
-                                    .strokeBorder(
-                                        ThemeColors.shared(for: colorScheme).accent.opacity(0.5),
-                                        lineWidth: 1)
-                            )
-                    )
-                    .onTapGesture {
-                        // Hide tutorial when user interacts with label
-                        tutorialShown = false
-                    }
+                    .buttonStyle(.plain)
                 }
 
                 // Notice Icons
@@ -321,6 +291,119 @@ struct MainWindow: View {
         }
     }
 
+    private var canAnimate: Bool {
+        animationEnabled && !accessibilityReduceMotion
+    }
+
+    private var modernWindowBackground: some View {
+        ZStack {
+            ThemeColors.shared(for: colorScheme).primaryBG
+
+            LinearGradient(
+                colors: [
+                    ThemeColors.shared(for: colorScheme).accent.opacity(
+                        colorScheme == .dark ? 0.08 : 0.045
+                    ),
+                    Color.clear,
+                ],
+                startPoint: .topLeading,
+                endPoint: .center
+            )
+        }
+        .ignoresSafeArea()
+    }
+
+    private var utilitySwitcher: some View {
+        Menu {
+            Section("Essentials") {
+                utilityMenuItems([.applications, .orphans, .updater])
+            }
+
+            Section("System") {
+                utilityMenuItems([.homebrew, .packages, .services, .plugins])
+            }
+
+            Section("Tools") {
+                utilityMenuItems([.fileSearch, .development, .lipo])
+            }
+        } label: {
+            HStack(spacing: PearMetrics.spacingS) {
+                Image(systemName: appState.currentPage.icon)
+                    .font(.system(size: PearMetrics.toolbarIconSize, weight: .semibold))
+                    .symbolRenderingMode(.hierarchical)
+                    .foregroundStyle(ThemeColors.shared(for: colorScheme).accent)
+                    .frame(width: 24, height: 24)
+                    .background(
+                        ThemeColors.shared(for: colorScheme).accentSurface,
+                        in: RoundedRectangle(cornerRadius: PearMetrics.radiusS, style: .continuous)
+                    )
+
+                Text(appState.currentPage.title)
+                    .font(.callout.weight(.semibold))
+                    .foregroundStyle(ThemeColors.shared(for: colorScheme).primaryText)
+
+                if updateManager.totalUpdateCount > 0 {
+                    Text(updateManager.totalUpdateCount, format: .number)
+                        .font(.caption2.weight(.bold))
+                        .monospacedDigit()
+                        .foregroundStyle(.white)
+                        .padding(.horizontal, 6)
+                        .frame(minHeight: 18)
+                        .background(.red, in: Capsule(style: .continuous))
+                        .accessibilityLabel(
+                            Text("\(updateManager.totalUpdateCount) updates available")
+                        )
+                }
+
+                Image(systemName: "chevron.down")
+                    .font(.caption2.weight(.semibold))
+                    .foregroundStyle(ThemeColors.shared(for: colorScheme).secondaryText)
+            }
+            .contentShape(Rectangle())
+        }
+        .menuIndicator(.hidden)
+        .fixedSize()
+        .help("Switch Utilities")
+        .accessibilityLabel(Text("Current utility: \(appState.currentPage.title)"))
+    }
+
+    @ViewBuilder
+    private func utilityMenuItems(_ pages: [CurrentPage]) -> some View {
+        ForEach(pages.filter { CurrentPage.availablePages.contains($0) }) { page in
+            Button {
+                selectUtility(page)
+            } label: {
+                Label {
+                    if page == .updater && (loadUpdatesOnStartup || updateManager.totalUpdateCount > 0) {
+                        Text("\(page.title) (\(updateManager.totalUpdateCount))")
+                    } else {
+                        Text(page.title)
+                    }
+                } icon: {
+                    Image(systemName: page.icon)
+                }
+            }
+        }
+    }
+
+    private func selectUtility(_ page: CurrentPage) {
+        guard page != appState.currentPage else {
+            tutorialShown = false
+            return
+        }
+
+        withAnimation(.easeInOut(duration: canAnimate ? PearMotion.standard : 0)) {
+            if page == .applications {
+                appState.appInfo = .empty
+                appState.currentView = .empty
+            }
+
+            appState.currentPage = page
+        }
+
+        tutorialShown = false
+    }
+
     @ViewBuilder
     private func noticeButton(
         image: String, color: Color, help: String, action: @escaping () -> Void
@@ -332,13 +415,16 @@ struct MainWindow: View {
                     .foregroundColor(color)
             }
             .shadow(color: Color(NSColor.windowBackgroundColor).opacity(1), radius: 1, x: 0, y: 0)
-            .shadow(color: color.opacity(1), radius: glowRadius, x: 0, y: 0)
-            .animation(.easeInOut(duration: 1).repeatForever(autoreverses: true), value: glowRadius)
+            .shadow(color: color.opacity(0.6), radius: glowRadius, x: 0, y: 0)
+            .animation(
+                .easeOut(duration: canAnimate ? PearMotion.standard : 0),
+                value: glowRadius
+            )
         }
         .buttonStyle(.plain)
         .help(help)
         .onAppear {
-            glowRadius = 5.0
+            glowRadius = canAnimate ? 3 : 0
         }
     }
 
@@ -400,175 +486,136 @@ struct MainWindow: View {
 
 struct MountedVolumeView: View {
     @AppStorage("settings.interface.greetingEnabled") private var greetingEnabled: Bool = true
-    @Environment(\.colorScheme) var colorScheme
-    @ObservedObject private var themeManager = ThemeManager.shared
-    @EnvironmentObject var appState: AppState
     @AppStorage("settings.interface.animationEnabled") private var animationEnabled: Bool = true
-    @AppStorage("settings.tutorial.dragToExpandShown") private var dragTutorialShown: Bool = true
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.colorScheme) private var colorScheme
+    @EnvironmentObject private var appState: AppState
     @State private var selectedVolumeIndex: Int = 0
 
-        // Debug sliders
-    @State private var perspectiveValue: Double = 0.7
-    @State private var rotationValue: Double = 35.0
-    @State private var spacingValue: Double = 100.0
-    @State private var scaleValue: Double = 0.95
-    @State private var minOpacity: Double = 0.5
-    @State private var opacityFade: Double = 0.5
-//    @State private var debugMode: Bool = false
+    private var gridColumns: [GridItem] {
+        [GridItem(.adaptive(minimum: 320, maximum: 560), spacing: PearMetrics.spacingL)]
+    }
+
+    private var externalVolumeCount: Int {
+        appState.volumeInfos.filter(\.isExternal).count
+    }
 
     var body: some View {
-        ZStack(alignment: .center) {
-            VStack {
+        VStack(alignment: .leading, spacing: 0) {
+            dashboardHeader
+                .padding(.horizontal, PearMetrics.spacingXL)
+                .padding(.top, 30)
+                .padding(.bottom, PearMetrics.spacingL)
 
-                if greetingEnabled {
-                    ProfileMenuView()
+            Divider()
+                .overlay(ThemeColors.shared(for: colorScheme).separator)
 
-                }
-
-                Spacer()
-
-                // Tutorial label for drag to expand (moved to end for proper z-order)
-                if dragTutorialShown {
-                    HStack {
-                        HStack {
-                            Image(systemName: "arrowshape.left.fill")
-                            Text("Drag to expand into grid mode")
-                        }
-                        .foregroundStyle(ThemeColors.shared(for: colorScheme).accent)
-                        .font(.caption)
-                        .padding(.horizontal, 8)
-                        .padding(.vertical, 4)
-                        .background(
-                            RoundedRectangle(cornerRadius: 6)
-                                .fill(ThemeColors.shared(for: colorScheme).secondaryBG)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 6)
-                                        .strokeBorder(
-                                            ThemeColors.shared(for: colorScheme).accent.opacity(0.5),
-                                            lineWidth: 1)
-                                )
-                        )
-                        .onTapGesture {
-                            dragTutorialShown = false
-                        }
-
-                        Spacer()
-                    }
-                } else {
-                    Text("Select an app from the sidebar to begin")
-                        .font(.caption)
+            if appState.volumeInfos.isEmpty {
+                VStack(spacing: PearMetrics.spacingM) {
+                    Image(systemName: "internaldrive")
+                        .font(.system(size: 34, weight: .medium))
                         .foregroundStyle(ThemeColors.shared(for: colorScheme).secondaryText)
+
+                    Text("Loading storage")
+                        .font(.headline)
+                        .foregroundStyle(ThemeColors.shared(for: colorScheme).primaryText)
+
+                    Text("Storage information will appear here shortly.")
+                        .font(.subheadline)
+                        .foregroundStyle(ThemeColors.shared(for: colorScheme).secondaryText)
+
+                    ProgressView()
+                        .controlSize(.small)
                 }
-
-
-            }
-
-            if !appState.volumeInfos.isEmpty {
-                ZStack {
-                    ForEach(Array(appState.volumeInfos.enumerated()), id: \.element.id) {
-                        index, volume in
-                        let offset = index - selectedVolumeIndex
-
-                        // Only show tiles within 1 position of center
-                        if abs(offset) <= 1 {
-                            let isCenter = offset == 0
-                            let scale = isCenter ? 1.0 : scaleValue
-                            let opacity = isCenter ? 1.0 : minOpacity
-                            let yOffset = Double(offset) * spacingValue
-
-                            // 3D perspective skew - adjustable
-                            let perspective =
-                                isCenter ? 0.0 : (offset > 0 ? -perspectiveValue : perspectiveValue)
-                            let rotationX =
-                                isCenter ? 0.0 : (offset > 0 ? rotationValue : rotationValue)
-
-                            VolumeItemView(volume: volume, isCenter: isCenter, onEject: ejectVolume)
-                                .scaleEffect(scale)
-                                .opacity(opacity)
-                                .offset(y: yOffset)
-                                .rotation3DEffect(
-                                    .degrees(rotationX),
-                                    axis: (x: 1, y: 0, z: 0),
-                                    perspective: perspective
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            } else {
+                ScrollView {
+                    LazyVGrid(columns: gridColumns, spacing: PearMetrics.spacingL) {
+                        ForEach(Array(appState.volumeInfos.enumerated()), id: \.element.id) {
+                            index, volume in
+                            VolumeItemView(volume: volume, onEject: ejectVolume)
+                                .overlay {
+                                    RoundedRectangle(
+                                        cornerRadius: PearMetrics.radiusL,
+                                        style: .continuous
+                                    )
+                                    .strokeBorder(
+                                        selectedVolumeIndex == index
+                                            ? ThemeColors.shared(for: colorScheme).accent.opacity(0.62)
+                                            : Color.clear,
+                                        lineWidth: 1.5
+                                    )
+                                }
+                                .contentShape(
+                                    RoundedRectangle(
+                                        cornerRadius: PearMetrics.radiusL,
+                                        style: .continuous
+                                    )
                                 )
-                                .shadow(
-                                    color: isCenter ? .black.opacity(0.3) : .clear,
-                                    radius: isCenter ? 10 : 0, x: 0, y: isCenter ? 5 : 0
-                                )
-                                .zIndex(isCenter ? 10 : Double(10 - abs(offset)))
                                 .onTapGesture {
                                     withAnimation(
-                                        Animation.spring(response: 0.4, dampingFraction: 0.6)
+                                        .easeOut(
+                                            duration: animationEnabled && !reduceMotion
+                                                ? PearMotion.standard : 0
+                                        )
                                     ) {
                                         selectedVolumeIndex = index
                                     }
                                 }
-                                .animation(
-                                    animationEnabled
-                                        ? .spring(response: 0.4, dampingFraction: 0.6)
-                                        : .linear(duration: 0), value: selectedVolumeIndex)
                         }
                     }
+                    .frame(maxWidth: 1160)
+                    .frame(maxWidth: .infinity)
+                    .padding(PearMetrics.spacingXL)
                 }
-            } else {
-                ProgressView()
-                    .controlSize(.small)
             }
-
-            // Debug controls at bottom (only show if debug mode enabled)
-//                if debugMode {
-//                    VStack {
-//                        Spacer()
-//                        VStack(spacing: 10) {
-//                            HStack {
-//                                Text("Perspective:")
-//                                Slider(value: $perspectiveValue, in: 0.0...1.0, step: 0.1)
-//                                Text(String(format: "%.1f", perspectiveValue))
-//                            }
-//                            HStack {
-//                                Text("Rotation:")
-//                                Slider(value: $rotationValue, in: 0.0...45.0, step: 1.0)
-//                                Text(String(format: "%.0f°", rotationValue))
-//                            }
-//                            HStack {
-//                                Text("Spacing:")
-//                                Slider(value: $spacingValue, in: 30.0...120.0, step: 5.0)
-//                                Text(String(format: "%.0f", spacingValue))
-//                            }
-//                            HStack {
-//                                Text("Scale:")
-//                                Slider(value: $scaleValue, in: 0.3...1.0, step: 0.05)
-//                                Text(String(format: "%.2f", scaleValue))
-//                            }
-//                            HStack {
-//                                Text("Min Opacity:")
-//                                Slider(value: $minOpacity, in: 0.1...0.9, step: 0.05)
-//                                Text(String(format: "%.2f", minOpacity))
-//                            }
-//                            Button("Toggle Debug") {
-//                                debugMode = false
-//                            }
-//                        }
-//                        .padding()
-//                        .background(ThemeColors.shared(for: colorScheme).secondaryBG)
-//                        .cornerRadius(8)
-//                        .frame(maxWidth: 400)
-//                    }
-//                }
         }
-        .padding()
         .ignoresSafeArea(edges: .top)
         .onAppear {
-            // Start with root volume (index 0) selected
             selectedVolumeIndex = 0
         }
-        .onChange(of: appState.isGridMode) { isGrid in
-            // Hide tutorial when user switches to grid mode
-            if isGrid {
-                dragTutorialShown = false
+        .onChange(of: appState.volumeInfos.count) { volumeCount in
+            if volumeCount > 0 {
+                selectedVolumeIndex = min(selectedVolumeIndex, volumeCount - 1)
             }
         }
+    }
 
+    private var dashboardHeader: some View {
+        HStack(alignment: .center, spacing: PearMetrics.spacingL) {
+            VStack(alignment: .leading, spacing: PearMetrics.spacingXS) {
+                HStack(spacing: PearMetrics.spacingS) {
+                    Image(systemName: "internaldrive.fill")
+                        .foregroundStyle(ThemeColors.shared(for: colorScheme).accent)
+
+                    Text("Storage")
+                        .font(.title2.weight(.semibold))
+                        .foregroundStyle(ThemeColors.shared(for: colorScheme).primaryText)
+                }
+
+                Text("Select an application from the sidebar to inspect and clean its files.")
+                    .font(.subheadline)
+                    .foregroundStyle(ThemeColors.shared(for: colorScheme).secondaryText)
+            }
+
+            Spacer(minLength: PearMetrics.spacingL)
+
+            if externalVolumeCount > 0 {
+                Label("\(externalVolumeCount) external", systemImage: "externaldrive.fill")
+                    .font(.caption.weight(.medium))
+                    .foregroundStyle(ThemeColors.shared(for: colorScheme).secondaryText)
+                    .padding(.horizontal, PearMetrics.spacingM)
+                    .frame(height: 28)
+                    .background(
+                        ThemeColors.shared(for: colorScheme).hoverSurface,
+                        in: Capsule(style: .continuous)
+                    )
+            }
+
+            if greetingEnabled {
+                ProfileMenuView()
+            }
+        }
     }
 
     private func ejectVolume(_ volume: VolumeInfo) {
@@ -595,51 +642,34 @@ struct MountedVolumeView: View {
     }
 }
 struct ProfileMenuView: View {
-    @Environment(\.colorScheme) var colorScheme
-    @State private var showMenu = false
+    @Environment(\.colorScheme) private var colorScheme
     @State private var profile: UserProfile? = nil
 
     var body: some View {
-        HStack {
-            Spacer()
+        HStack(spacing: PearMetrics.spacingS) {
             if let name = profile?.firstName {
                 Text(name.lowercased())
-                    .font(.largeTitle)
-                    .fontWeight(.thin)
-                    .foregroundStyle(ThemeColors.shared(for: colorScheme).primaryText)
+                    .font(.subheadline.weight(.medium))
+                    .foregroundStyle(ThemeColors.shared(for: colorScheme).secondaryText)
             }
 
             if let image = profile?.image {
-                Button {
-//                    showMenu.toggle()
-                } label: {
-                    Image(nsImage: image)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 40, height: 40)
-                        .clipShape(Circle())
-                        .overlay {
-                            Circle()
-                                .strokeBorder(
-                                    ThemeColors.shared(for: colorScheme).primaryText,
-                                    lineWidth: 1
-                                )
-                        }
-                }
-                .buttonStyle(.plain)
-                .allowsHitTesting(false)
-//                .popover(isPresented: $showMenu, arrowEdge: .bottom) {
-//                    VStack(alignment: .leading, spacing: 12) {
-//                        Button("Profile Settings") { }
-//                        Button("Switch User") { }
-//                        Divider()
-//                        Button("Log Out", role: .destructive) { }
-//                    }
-//                    .padding()
-//                    .frame(width: 200)
-//                }
+                Image(nsImage: image)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 32, height: 32)
+                    .clipShape(Circle())
+                    .overlay {
+                        Circle()
+                            .strokeBorder(
+                                ThemeColors.shared(for: colorScheme).separator,
+                                lineWidth: 1
+                            )
+                    }
             }
         }
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("User profile")
         .onAppear {
             Task {
                 profile = await getUserProfile()
@@ -650,11 +680,11 @@ struct ProfileMenuView: View {
 
 struct VolumeItemView: View {
     let volume: VolumeInfo
-    let isCenter: Bool
     let onEject: (VolumeInfo) -> Void
-    @Environment(\.colorScheme) var colorScheme
-    @EnvironmentObject var appState: AppState
     @AppStorage("settings.interface.animationEnabled") private var animationEnabled: Bool = true
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.colorScheme) private var colorScheme
+    @EnvironmentObject private var appState: AppState
     @State private var purgeableSize: Int64 = 0
     @State private var usedSize: Int64 = 0
     @State private var hoverAvailable: Bool = false
@@ -664,237 +694,277 @@ struct VolumeItemView: View {
     @State private var isHoveredName: Bool = false
 
     var body: some View {
-        VStack(alignment: .center, spacing: 20) {
-            HStack(alignment: .center) {
+        VStack(alignment: .leading, spacing: PearMetrics.spacingL) {
+            HStack(alignment: .center, spacing: PearMetrics.spacingL) {
                 volume.icon
                     .resizable()
                     .scaledToFit()
-                    .frame(height: 70)
-                    .offset(y: 4)
+                    .frame(width: 58, height: 58)
+                    .padding(PearMetrics.spacingS)
+                    .background(
+                        ThemeColors.shared(for: colorScheme).hoverSurface,
+                        in: RoundedRectangle(
+                            cornerRadius: PearMetrics.radiusS,
+                            style: .continuous
+                        )
+                    )
 
-                VStack(alignment: .leading) {
+                VStack(alignment: .leading, spacing: PearMetrics.spacingXS) {
                     HStack {
                         HStack(spacing: 8) {
-                            Text(volume.name)
-                                .font(.title)
-                                .fontWeight(.bold)
-                                .foregroundStyle(ThemeColors.shared(for: colorScheme).primaryText)
-                                .underline(isHoveredName)
-                                .onTapGesture {
-                                    NSWorkspace.shared.open(
-                                        URL(
-                                            string:
-                                                "x-apple.systempreferences:com.apple.settings.Storage"
-                                        )!)
-                                }
-                                .onHover(perform: { isHovered in
-                                    self.isHoveredName = isHovered
-                                })
+                            Button(action: openStorageSettings) {
+                                Text(volume.name)
+                                    .font(.title3.weight(.semibold))
+                                    .foregroundStyle(
+                                        ThemeColors.shared(for: colorScheme).primaryText
+                                    )
+                                    .underline(isHoveredName)
+                                    .lineLimit(1)
+                            }
+                            .buttonStyle(.plain)
+                            .onHover { isHoveredName = $0 }
+                            .help("Open Storage Settings")
 
                             if volume.isExternal {
-                                Button(action: {
+                                Button {
                                     onEject(volume)
-                                }) {
-                                    Image(systemName: "eject")
-                                        .font(.title3)
-                                        .foregroundStyle(
-                                            ThemeColors.shared(for: colorScheme).secondaryText)
+                                } label: {
+                                    Image(systemName: "eject.fill")
+                                        .font(.caption.weight(.semibold))
+                                        .frame(width: 28, height: 28)
                                 }
-                                .buttonStyle(PlainButtonStyle())
+                                .buttonStyle(.borderless)
+                                .foregroundStyle(
+                                    ThemeColors.shared(for: colorScheme).secondaryText
+                                )
+                                .help("Eject \(volume.name)")
                             }
                         }
 
                         Spacer()
 
-                        let percentUsed = Double(volume.usedSpace) / Double(volume.totalSpace) * 100
                         Text(String(format: "%.0f%% full", percentUsed))
-                            .font(.caption)
-                            .foregroundStyle(ThemeColors.shared(for: colorScheme).secondaryText)
-                            .offset(y: -5)
-                    }
-                    .padding(.bottom, 4)
-
-                    HStack {
-                        Text("Location:")
-                            .font(.caption)
-                            .foregroundStyle(ThemeColors.shared(for: colorScheme).secondaryText)
-                        Text(verbatim: "\(volume.path)")
-                            .font(.subheadline)
-                            .foregroundStyle(ThemeColors.shared(for: colorScheme).primaryText)
+                            .font(.caption.weight(.semibold))
+                            .monospacedDigit()
+                            .foregroundStyle(ThemeColors.shared(for: colorScheme).accent)
+                            .padding(.horizontal, PearMetrics.spacingS)
+                            .frame(height: 24)
+                            .background(
+                                ThemeColors.shared(for: colorScheme).accentSurface,
+                                in: Capsule(style: .continuous)
+                            )
                     }
 
                     HStack {
-                        Text("Available:")
-                            .font(.caption)
-                            .foregroundStyle(ThemeColors.shared(for: colorScheme).secondaryText)
-                        Text(
-                            ByteCountFormatter.string(
-                                fromByteCount: volume.realAvailableSpace, countStyle: .file)
-                        )
-                        .font(.subheadline)
-                        .foregroundStyle(
-                            hoverAvailable
-                                ? Color.green : ThemeColors.shared(for: colorScheme).primaryText
-                        )
-                        .animation(.easeInOut(duration: 0.2), value: hoverAvailable)
+                        Image(systemName: volume.isExternal ? "externaldrive" : "internaldrive")
+                        Text(volume.path)
+                            .lineLimit(1)
+                            .truncationMode(.middle)
                     }
+                    .font(.caption)
+                    .foregroundStyle(ThemeColors.shared(for: colorScheme).secondaryText)
 
-                    if volume.purgeableSpace > 0 {
-                        HStack {
-                            Text("Purgeable:")
-                                .font(.caption)
-                                .foregroundStyle(ThemeColors.shared(for: colorScheme).secondaryText)
-                            Text(
-                                ByteCountFormatter.string(
-                                    fromByteCount: volume.purgeableSpace, countStyle: .file)
-                            )
-                            .font(.subheadline)
-                            .foregroundStyle(
-                                hoverPurgeable
-                                    ? ThemeColors.shared(for: colorScheme).accent
-                                    : ThemeColors.shared(for: colorScheme).primaryText
-                            )
-                            .animation(.easeInOut(duration: 0.2), value: hoverPurgeable)
-                        }
-                        .help(
-                            "Purgeable space refers to the System Data taken up by macOS. This cannot be manually freed and is automatically managed by your system."
-                        )
-                    }
                 }
             }
 
-            HStack(alignment: .center) {
-                Text(ByteCountFormatter.string(fromByteCount: volume.usedSpace, countStyle: .file))
-                    .font(.caption)
-                    .foregroundStyle(
-                        hoverUsed
-                            ? ThemeColors.shared(for: colorScheme).accent
-                            : ThemeColors.shared(for: colorScheme).secondaryText
-                    )
-                    .offset(y: -1)
+            HStack(spacing: PearMetrics.spacingS) {
+                storageMetric(
+                    title: "Used",
+                    value: ByteCountFormatter.string(
+                        fromByteCount: volume.usedSpace,
+                        countStyle: .file
+                    ),
+                    isHighlighted: hoverUsed
+                )
 
+                storageMetric(
+                    title: "Available",
+                    value: ByteCountFormatter.string(
+                        fromByteCount: volume.realAvailableSpace,
+                        countStyle: .file
+                    ),
+                    isHighlighted: hoverAvailable
+                )
+
+                if volume.purgeableSpace > 0 {
+                    storageMetric(
+                        title: "Purgeable",
+                        value: ByteCountFormatter.string(
+                            fromByteCount: volume.purgeableSpace,
+                            countStyle: .file
+                        ),
+                        isHighlighted: hoverPurgeable
+                    )
+                    .help(
+                        "Purgeable space is managed automatically by macOS and cannot be freed manually."
+                    )
+                }
+            }
+
+            VStack(alignment: .leading, spacing: PearMetrics.spacingS) {
                 GeometryReader { geo in
                     ZStack(alignment: .leading) {
-                        RoundedRectangle(cornerRadius: 5)
-                            .fill(ThemeColors.shared(for: colorScheme).primaryBG)
+                        Capsule()
+                            .fill(ThemeColors.shared(for: colorScheme).hoverSurface)
 
-                        RoundedRectangle(cornerRadius: 5)
-                            .fill(ThemeColors.shared(for: colorScheme).accent)
-                            .brightness(-0.3)
-                            .saturation(0.5)
-                            .padding(3)
-                            .frame(
-                                width: geo.size.width * CGFloat(purgeableSize)
-                                    / CGFloat(volume.totalSpace)
-                            )
+                        Capsule()
+                            .fill(ThemeColors.shared(for: colorScheme).accent.opacity(0.42))
+                            .frame(width: geo.size.width * purgeableFraction)
                             .animation(
-                                animationEnabled && !volume.hasAnimated
-                                    ? .spring(response: 0.7, dampingFraction: 0.6, blendDuration: 0)
+                                animationEnabled && !reduceMotion && !volume.hasAnimated
+                                    ? .spring(response: 0.7, dampingFraction: 0.72)
                                     : .linear(duration: 0), value: purgeableSize
                             )
                             .help(
-                                "Purgeable space refers to the System Data taken up by macOS. This cannot be manually freed and is automatically managed by your system."
+                                "Purgeable space is managed automatically by macOS and cannot be freed manually."
                             )
 
-                        RoundedRectangle(cornerRadius: 5)
+                        Capsule()
                             .fill(ThemeColors.shared(for: colorScheme).accent)
-                            .padding(3)
-                            .frame(
-                                width: geo.size.width * CGFloat(usedSize)
-                                    / CGFloat(volume.totalSpace)
-                            )
+                            .frame(width: geo.size.width * usedFraction)
                             .animation(
-                                animationEnabled && !volume.hasAnimated
-                                    ? .spring(response: 0.7, dampingFraction: 0.6, blendDuration: 0)
+                                animationEnabled && !reduceMotion && !volume.hasAnimated
+                                    ? .spring(response: 0.7, dampingFraction: 0.72)
                                     : .linear(duration: 0), value: usedSize)
 
                         HStack(spacing: 0) {
                             Rectangle()
                                 .fill(Color.clear)
-                                .frame(
-                                    width: geo.size.width * CGFloat(volume.usedSpace)
-                                        / CGFloat(volume.totalSpace), height: 10
-                                )
-                                .onHover { hovering in
-                                    hoverUsed = hovering
-                                }
+                                .frame(width: geo.size.width * usedFraction)
+                                .onHover { hoverUsed = $0 }
 
                             Rectangle()
                                 .fill(Color.clear)
-                                .frame(
-                                    width: geo.size.width * CGFloat(volume.purgeableSpace)
-                                        / CGFloat(volume.totalSpace), height: 10
-                                )
-                                .onHover { hovering in
-                                    hoverPurgeable = hovering
-                                }
+                                .frame(width: geo.size.width * purgeableOnlyFraction)
+                                .onHover { hoverPurgeable = $0 }
 
                             Rectangle()
                                 .fill(Color.clear)
-                                .frame(height: 10)
-                                .onHover { hovering in
-                                    hoverAvailable = hovering
-                                }
-
-                            Spacer()
+                                .onHover { hoverAvailable = $0 }
                         }
                     }
                 }
+                .frame(height: 10)
 
-                Text(ByteCountFormatter.string(fromByteCount: volume.totalSpace, countStyle: .file))
-                    .font(.caption)
-                    .foregroundStyle(ThemeColors.shared(for: colorScheme).secondaryText)
-                    .offset(y: -1)
-            }
-            .frame(height: 10)
-        }
-        .padding()
-        .background(
-            RoundedRectangle(cornerRadius: 12)
-                .fill(ThemeColors.shared(for: colorScheme).secondaryBG)
-        )
-        .frame(maxWidth: 500)
-        .disabled(!isCenter)
-        .scaleEffect((!isCenter && isHovered) ? 1.01 : 1.0)
-        .onHover { hovering in
-            if !isCenter {
-                withAnimation(.easeInOut(duration: 0.2)) {
-                    isHovered = hovering
+                HStack {
+                    Text("0")
+                    Spacer()
+                    Text(
+                        ByteCountFormatter.string(
+                            fromByteCount: volume.totalSpace,
+                            countStyle: .file
+                        )
+                    )
                 }
+                .font(.caption2)
+                .monospacedDigit()
+                .foregroundStyle(ThemeColors.shared(for: colorScheme).secondaryText)
             }
         }
-        .onChange(of: isCenter) { centered in
-            if centered {
-                // Clear hover state when becoming center
-                isHovered = false
-            }
+        .padding(PearMetrics.spacingL)
+        .background {
+            RoundedRectangle(cornerRadius: PearMetrics.radiusL, style: .continuous)
+                .fill(
+                    isHovered
+                        ? ThemeColors.shared(for: colorScheme).elevatedSurface
+                        : ThemeColors.shared(for: colorScheme).secondaryBG
+                )
+                .overlay {
+                    RoundedRectangle(cornerRadius: PearMetrics.radiusL, style: .continuous)
+                        .strokeBorder(
+                            ThemeColors.shared(for: colorScheme).separator,
+                            lineWidth: 1
+                        )
+                }
+                .shadow(
+                    color: ThemeColors.shared(for: colorScheme).windowShadow,
+                    radius: isHovered ? 12 : 5,
+                    y: isHovered ? 6 : 2
+                )
         }
+        .scaleEffect(isHovered ? 1.006 : 1)
+        .animation(
+            .easeOut(duration: animationEnabled && !reduceMotion ? PearMotion.standard : 0),
+            value: isHovered
+        )
+        .onHover { isHovered = $0 }
         .onAppear {
             if volume.hasAnimated {
                 purgeableSize = volume.usedSpace + volume.purgeableSpace
                 usedSize = volume.usedSpace
-            } else if isCenter {
-                startVolumeAnimation()
             } else {
-                purgeableSize = 0
-                usedSize = 0
-            }
-        }
-        .onChange(of: isCenter) { centered in
-            if centered && !volume.hasAnimated {
                 startVolumeAnimation()
-            } else if !centered {
-                purgeableSize = volume.usedSpace + volume.purgeableSpace
-                usedSize = volume.usedSpace
             }
         }
+    }
+
+    private var percentUsed: Double {
+        guard volume.totalSpace > 0 else { return 0 }
+        return Double(volume.usedSpace) / Double(volume.totalSpace) * 100
+    }
+
+    private var usedFraction: CGFloat {
+        storageFraction(for: usedSize)
+    }
+
+    private var purgeableFraction: CGFloat {
+        storageFraction(for: purgeableSize)
+    }
+
+    private var purgeableOnlyFraction: CGFloat {
+        storageFraction(for: volume.purgeableSpace)
+    }
+
+    private func storageFraction(for size: Int64) -> CGFloat {
+        guard volume.totalSpace > 0 else { return 0 }
+        return min(max(CGFloat(size) / CGFloat(volume.totalSpace), 0), 1)
+    }
+
+    private func storageMetric(
+        title: LocalizedStringKey,
+        value: String,
+        isHighlighted: Bool
+    ) -> some View {
+        VStack(alignment: .leading, spacing: PearMetrics.spacingXS) {
+            Text(title)
+                .font(.caption)
+                .foregroundStyle(ThemeColors.shared(for: colorScheme).secondaryText)
+
+            Text(value)
+                .font(.subheadline.weight(.semibold))
+                .monospacedDigit()
+                .foregroundStyle(
+                    isHighlighted
+                        ? ThemeColors.shared(for: colorScheme).accent
+                        : ThemeColors.shared(for: colorScheme).primaryText
+                )
+                .lineLimit(1)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(PearMetrics.spacingM)
+        .background(
+            ThemeColors.shared(for: colorScheme).hoverSurface,
+            in: RoundedRectangle(cornerRadius: PearMetrics.radiusS, style: .continuous)
+        )
+    }
+
+    private func openStorageSettings() {
+        guard
+            let url = URL(
+                string: "x-apple.systempreferences:com.apple.settings.Storage"
+            )
+        else {
+            return
+        }
+
+        NSWorkspace.shared.open(url)
     }
 
     private func startVolumeAnimation() {
         purgeableSize = 0
         usedSize = 0
 
-        if animationEnabled {
+        if animationEnabled && !reduceMotion {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 self.purgeableSize = volume.usedSpace + volume.purgeableSpace
             }
@@ -917,4 +987,3 @@ struct VolumeItemView: View {
     }
 
 }
-

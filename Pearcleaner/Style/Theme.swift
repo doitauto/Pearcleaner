@@ -108,6 +108,28 @@ struct ThemeColors {
     var accent: Color {
         Color(hex: currentColors[4])
     }
+
+    // MARK: - Semantic Interface Colors
+
+    var elevatedSurface: Color {
+        isDark ? Color.white.opacity(0.07) : Color.white.opacity(0.72)
+    }
+
+    var hoverSurface: Color {
+        primaryText.opacity(isDark ? 0.10 : 0.06)
+    }
+
+    var separator: Color {
+        primaryText.opacity(isDark ? 0.16 : 0.10)
+    }
+
+    var accentSurface: Color {
+        accent.opacity(isDark ? 0.20 : 0.11)
+    }
+
+    var windowShadow: Color {
+        Color.black.opacity(isDark ? 0.28 : 0.12)
+    }
     
     // MARK: - Static Methods for Theme Management (now use ThemeManager)
     static func saveCustomColors(dark: String, light: String) {
@@ -134,6 +156,25 @@ struct ThemeColors {
         let defaultColors = colorScheme == .dark ? defaultDarkColors : defaultLightColors
         return defaultColors.joined(separator: ", ")
     }
+}
+
+enum PearMetrics {
+    static let spacingXS: CGFloat = 4
+    static let spacingS: CGFloat = 8
+    static let spacingM: CGFloat = 12
+    static let spacingL: CGFloat = 16
+    static let spacingXL: CGFloat = 24
+
+    static let radiusS: CGFloat = 8
+    static let radiusL: CGFloat = 16
+    static let radiusXL: CGFloat = 20
+
+    static let standardControlHeight: CGFloat = 36
+    static let toolbarIconSize: CGFloat = 16
+}
+
+enum PearMotion {
+    static let standard: Double = 0.24
 }
 
 // MARK: - View Extension for Easy Access

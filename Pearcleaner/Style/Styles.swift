@@ -770,7 +770,6 @@ extension View {
 
 struct SimpleSearchStyleSidebar: TextFieldStyle {
     @Environment(\.colorScheme) var colorScheme
-    @State private var isHovered = false
     @FocusState private var isFocused: Bool
     @State var menu: Bool = true
     @State var trash: Bool = false
@@ -785,20 +784,30 @@ struct SimpleSearchStyleSidebar: TextFieldStyle {
 
     func _body(configuration: TextField<Self._Label>) -> some View {
 
-        HStack {
+        HStack(spacing: PearMetrics.spacingS) {
+            Image(systemName: "magnifyingglass")
+                .font(.system(size: 13, weight: .medium))
+                .foregroundStyle(ThemeColors.shared(for: colorScheme).secondaryText)
+
             configuration
-                .font(.title3)
+                .font(.body)
                 .textFieldStyle(PlainTextFieldStyle())
 
             Spacer()
 
-            if trash && text != "" {
+            if trash && !text.isEmpty {
                 Button {
                     text = ""
                 } label: {
-                    Image(systemName: "delete.left.fill")
+                    Image(systemName: "xmark.circle.fill")
+                        .symbolRenderingMode(.hierarchical)
                         .foregroundStyle(ThemeColors.shared(for: colorScheme).secondaryText)
+                        .frame(width: 24, height: 24)
+                        .contentShape(Rectangle())
                 }
+                .buttonStyle(.plain)
+                .help("Clear Search")
+                .accessibilityLabel("Clear Search")
             }
 
             if menu {
@@ -865,34 +874,27 @@ struct SimpleSearchStyleSidebar: TextFieldStyle {
                         }
                     }
                 } label: {
-                    Image(systemName: "line.3.horizontal")
+                    Image(systemName: "slider.horizontal.3")
+                        .font(.system(size: 13, weight: .medium))
                         .foregroundStyle(ThemeColors.shared(for: colorScheme).secondaryText)
-                        .padding(2)
+                        .frame(width: 28, height: 28)
                         .contentShape(Rectangle())
                 }
                 .menuStyle(BorderlessButtonMenuStyle())
                 .menuIndicator(.hidden)
-                .frame(width: 16)
+                .fixedSize()
+                .help("List Options")
+                .accessibilityLabel("List Options")
             }
 
 
         }
         .buttonStyle(.plain)
-        .padding(.vertical, 8)
-        .padding(.horizontal, 14)
+        .padding(.leading, PearMetrics.spacingM)
+        .padding(.trailing, PearMetrics.spacingXS)
+        .frame(minHeight: PearMetrics.standardControlHeight)
         .controlGroup(Capsule(style: .continuous), level: .primary)
-        .onHover { hovering in
-            withAnimation(Animation.easeInOut(duration: animationEnabled ? 0.35 : 0)) {
-                self.isHovered = hovering
-                self.isFocused = true
-            }
-        }
         .focused($isFocused)
-        .onAppear {
-            updateOnMain {
-                self.isFocused = true
-            }
-        }
     }
 }
 
