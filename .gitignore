@@ -92,3 +92,6 @@ iOSInjectionProject/
 Builds/Export
 .claude
 Pearcleaner/Resources/Localizable.xcstrings.bak
+
+# Generated codebase analysis
+graphify-out/
