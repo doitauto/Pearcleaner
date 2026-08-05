@@ -2,6 +2,7 @@
   "sourceLanguage" : "en",
   "strings" : {
     "Pearcleaner Uninstall" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -94,6 +95,9 @@
           }
         }
       }
+    },
+    "Uninstall with AppRinse" : {
+
     }
   },
   "version" : "1.0"

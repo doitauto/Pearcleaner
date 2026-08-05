@@ -713,6 +713,16 @@
         }
       }
     },
+    "%@ (%lld)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ (%2$lld)"
+          }
+        }
+      }
+    },
     "%@ is already on the latest release available" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1068,6 +1078,9 @@
           }
         }
       }
+    },
+    "%lld external" : {
+
     },
     "%lld file%@" : {
       "localizations" : {
@@ -2863,6 +2876,9 @@
         }
       }
     },
+    "%lld updates available" : {
+
+    },
     "%lld valid %@ found" : {
       "localizations" : {
         "de" : {
@@ -4295,6 +4311,9 @@
           }
         }
       }
+    },
+    "0" : {
+
     },
     "0 bytes" : {
       "localizations" : {
@@ -11152,6 +11171,722 @@
         }
       }
     },
+    "AppRinse and all of its files will be cleanly removed, are you sure?" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse und alle seine Dateien werden sauber entfernt, sind Sie sicher?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Está seguro de que desea eliminar AppRinse y todos sus archivos?"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse et tous ses fichiers seront supprimés, êtes-vous sûr(e) ?"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse dan semua filenya akan dihapus dengan bersih, apakah Anda yakin?"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse e tutti i suoi file verranno rimossi completamente, sei sicuro?"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse とそのすべてのファイルが完全に削除されます。よろしいですか？"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse와 그 모든 파일이 깨끗하게 제거됩니다. 확실합니까?"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse i wszystkie jego pliki zostaną całkowicie usunięte. Czy na pewno chcesz to zrobić?"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O AppRinse e todos os seus arquivos serão removidos de forma limpa, tem certeza?"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O AppRinse e todos os seus ficheiros serão removidos de forma limpa, tem a certeza?"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse и все его файлы будут полностью удалены, вы уверены?"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse a všetky jeho súbory budú úplne odstránené, si si istý?"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse in vse njegove datoteke bodo čisto odstranjene, ste prepričani?"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse ve onun tüm dosyaları tamamen kaldırılacak, emin misiniz?"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse і всі його файли буде повністю видалено, ви впевнені?"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse và tất cả các tệp của nó sẽ bị gỡ bỏ sạch sẽ, bạn có chắc chắn không?"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse 及其所有文件将被干净地移除，您确定吗？"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse 及其全部檔案將會完全移除，你確定嗎？"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse 及其全部檔案將會完全移除，你確定嗎？"
+          }
+        }
+      }
+    },
+    "AppRinse CLI support" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse CLI Unterstützung"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Soporte para AppRinse CLI"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajouter AppRinse à l’interface de ligne de commande"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dukungan CLI/Baris Perintah AppRinse"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Supporto CLI AppRinse"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse CLI サポート"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse CLI 지원"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Obsługa AppRinse CLI"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suporte CLI do AppRinse"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suporte CLI do AppRinse"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Поддержка CLI AppRinse"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse CLI podpora"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Podpora za AppRinse CLI"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse CLI desteği"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Підтримка AppRinse CLI"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hỗ trợ sử dụng AppRinse bằng dòng lệnh"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse CLI 支持"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse 命令列介面（CLI）支援"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse 命令列介面（CLI）支援"
+          }
+        }
+      }
+    },
+    "AppRinse requires permissions to search all system locations comprehensively." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse benötigt Berechtigungen, um alle Systemstandorte umfassend zu durchsuchen."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse requiere permisos para buscar en todas las ubicaciones del sistema de manera exhaustiva."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse nécessite des autorisations pour rechercher de manière exhaustive tous les emplacements système."
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse memerlukan izin untuk mencari semua lokasi sistem secara menyeluruh."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse richiede autorizzazioni per cercare in modo completo tutte le posizioni di sistema."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse はすべてのシステムの場所を包括的に検索するための権限が必要です。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse는 모든 시스템 위치를 포괄적으로 검색하기 위해 권한이 필요합니다."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse wymaga uprawnień do kompleksowego przeszukiwania wszystkich lokalizacji systemowych."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse requer permissões para pesquisar de forma abrangente todos os locais do sistema."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse requer permissões para pesquisar todos os locais do sistema de forma abrangente."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse требует разрешений для всестороннего поиска по всем системным местоположениям."
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse vyžaduje povolenia na komplexné prehľadávanie všetkých systémových umiestnení."
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse potrebuje dovoljenja za celovito iskanje po vseh sistemskih lokacijah."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse, tüm sistem konumlarını kapsamlı bir şekilde aramak için izin gerektirir."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse потребує дозволів для всебічного пошуку у всіх системних місцях."
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse yêu cầu quyền để tìm kiếm toàn diện tất cả các vị trí hệ thống."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse 需要权限来全面搜索所有系统位置。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse 需要權限來全面搜索所有系統位置。"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse 需要權限來全面搜尋所有系統位置。"
+          }
+        }
+      }
+    },
+    "AppRinse Uninstall" : {
+      "comment" : "Right click context menu item when using the Finder extension to uninstall using AppRinse",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse Deinstallation"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desinstalar AppRinse"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Désinstaller avec AppRinse"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copot AppRinse"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Disinstalla AppRinse"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinseでアンインストール"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse 제거"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Odinstaluj za pomocą AppRinse"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desinstalar o AppRinse"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desinstalar AppRinse"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Удалить через AppRinse"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Odinštalovať AppRinseom"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Odstrani AppRinse"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse ile Kaldırma"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Видалити через AppRinse"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gỡ cài đặt AppRinse"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse 卸载"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse 解除安裝"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse 解除安裝"
+          }
+        }
+      }
+    },
+    "AppRinse will ask you to enter your password once to enable the helper, then all subsequent privileged operations will run without any other prompts as long as the helper stays enabled in Settings > Login Items. This authorization is all managed by macOS via SMAppService." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse wird Sie einmal nach Ihrem Passwort fragen, um den Helfer zu aktivieren, dann werden alle nachfolgenden privilegierten Operationen ohne weitere Aufforderungen ausgeführt, solange der Helfer in Einstellungen > Anmeldeobjekte aktiviert bleibt. Diese Autorisierung wird von macOS über SMAppService verwaltet."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse te pedirá que ingreses tu contraseña una vez para habilitar el asistente, luego todas las operaciones privilegiadas posteriores se ejecutarán sin ningún otro aviso mientras el asistente permanezca habilitado en Configuración > Elementos de inicio de sesión. Esta autorización es gestionada por macOS a través de SMAppService."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse vous demandera de saisir votre mot de passe une fois pour activer l'assistant, puis toutes les opérations privilégiées suivantes s'exécuteront sans aucune autre invite tant que l'assistant reste activé dans Réglages > Éléments de connexion. Cette autorisation est gérée par macOS via SMAppService."
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse akan meminta Anda memasukkan kata sandi sekali untuk mengaktifkan pembantu, kemudian semua operasi istimewa berikutnya akan berjalan tanpa permintaan lain selama pembantu tetap diaktifkan di Pengaturan > Item Masuk. Otorisasi ini dikelola oleh macOS melalui SMAppService."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse ti chiederà di inserire la tua password una volta per abilitare l'assistente, quindi tutte le operazioni privilegiate successive verranno eseguite senza altri avvisi finché l'assistente rimane abilitato in Impostazioni > Elementi di accesso. Questa autorizzazione è gestita da macOS tramite SMAppService."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse は、ヘルパーを有効にするために一度だけパスワードを入力するよう求め、その後、ヘルパーが設定 > ログイン項目で有効なままである限り、すべての後続の特権操作は他のプロンプトなしで実行されます。この承認は macOS によって SMAppService 経由で管理されます。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse는 도우미를 활성화하기 위해 한 번 비밀번호를 입력하도록 요청한 후, 도우미가 설정 > 로그인 항목에서 활성화된 상태로 유지되는 한 모든 후속 권한 작업은 다른 프롬프트 없이 실행됩니다. 이 권한 부여는 SMAppService를 통해 macOS에서 관리됩니다."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse poprosi Cię o podanie hasła raz, aby włączyć pomocnika, a następnie wszystkie kolejne operacje uprzywilejowane będą działać bez żadnych innych monitów, dopóki pomocnik pozostaje włączony w Ustawieniach > Elementy logowania. Ta autoryzacja jest zarządzana przez macOS za pośrednictwem SMAppService."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O AppRinse pedirá que você insira sua senha uma vez para ativar o assistente, então todas as operações privilegiadas subsequentes serão executadas sem qualquer outro aviso, desde que o assistente permaneça ativado em Configurações > Itens de Login. Esta autorização é gerenciada pelo macOS via SMAppService."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O AppRinse pedirá que você insira sua senha uma vez para habilitar o assistente, então todas as operações privilegiadas subsequentes serão executadas sem outros avisos, desde que o assistente permaneça habilitado em Ajustes > Itens de Início de Sessão. Esta autorização é toda gerida pelo macOS via SMAppService."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse попросит вас ввести пароль один раз, чтобы включить помощник, после чего все последующие привилегированные операции будут выполняться без дополнительных запросов, пока помощник остается включенным в Настройки > Элементы входа. Это разрешение управляется macOS через SMAppService."
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse vás požiada o zadanie hesla raz na povolenie pomocníka, potom všetky nasledujúce privilegované operácie budú prebiehať bez ďalších výziev, pokiaľ pomocník zostane povolený v Nastaveniach > Položky prihlásenia. Toto overenie je spravované systémom macOS prostredníctvom SMAppService."
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse vas bo prosil, da enkrat vnesete geslo za omogočanje pomočnika, nato pa bodo vse nadaljnje privilegirane operacije potekale brez drugih pozivov, dokler bo pomočnik ostal omogočen v Nastavitve > Elementi za prijavo. To avtorizacijo upravlja macOS prek SMAppService."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse, yardımcıyı etkinleştirmek için sizden bir kez şifrenizi girmenizi isteyecek, ardından yardımcı Ayarlar > Giriş Öğeleri'nde etkin kaldığı sürece tüm sonraki ayrıcalıklı işlemler başka bir uyarı olmadan çalışacaktır. Bu yetkilendirme, macOS tarafından SMAppService aracılığıyla yönetilir."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse попросить вас ввести пароль один раз, щоб увімкнути помічника, після чого всі наступні привілейовані операції будуть виконуватися без будь-яких інших запитів, доки помічник залишається увімкненим у Налаштуваннях > Елементи входу. Ця авторизація керується macOS через SMAppService."
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse sẽ yêu cầu bạn nhập mật khẩu một lần để kích hoạt trình trợ giúp, sau đó tất cả các thao tác đặc quyền tiếp theo sẽ chạy mà không có bất kỳ lời nhắc nào khác miễn là trình trợ giúp vẫn được bật trong Cài đặt > Mục đăng nhập. Sự ủy quyền này được quản lý bởi macOS thông qua SMAppService."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse 会要求您输入密码一次以启用助手，然后所有后续的特权操作将在没有其他提示的情况下运行，只要助手在设置 > 登录项中保持启用状态。此授权由 macOS 通过 SMAppService 管理。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse 會要求您輸入密碼一次以啟用助手，然後所有後續的特權操作將在不提示的情況下運行，只要助手在設定 > 登入項目中保持啟用狀態。此授權由 macOS 通過 SMAppService 管理。"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse 會要求您輸入密碼一次以啟用助手，然後所有後續的特權操作將在不提示的情況下運行，只要助手在設定 > 登入項目中保持啟用狀態。此授權由 macOS 通過 SMAppService 管理。"
+          }
+        }
+      }
+    },
+    "AppRinse will find the application and its related files." : {
+
+    },
+    "AppRinse will strip the %@ architecture from %@'s executable file to save space. Would you like to proceed?" : {
+      "comment" : "Lipo alert message",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse wird die %@-Architektur aus der ausführbaren Datei von %@ entfernen, um Speicherplatz zu sparen. Möchten Sie fortfahren?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse eliminará la arquitectura %@ del archivo ejecutable de %@ para ahorrar espacio. ¿Desea continuar?"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse supprimera l'architecture %@ du fichier exécutable de %@ pour économiser de l'espace. Voulez-vous continuer ?"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse akan menghapus arsitektur %@ dari file eksekusi %@ untuk menghemat ruang. Apakah Anda ingin melanjutkan?"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse rimuoverà l'architettura %@ dal file eseguibile di %@ per risparmiare spazio. Vuoi procedere?"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinseは、スペースを節約するために%@の実行可能ファイルから%@アーキテクチャを削除します。続行しますか？"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse가 공간을 절약하기 위해 %@의 실행 파일에서 %@ 아키텍처를 제거합니다. 계속하시겠습니까?"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse usunie architekturę %@ z pliku wykonywalnego %@, aby zaoszczędzić miejsce. Czy chcesz kontynuować?"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse removerá a arquitetura %@ do arquivo executável de %@ para economizar espaço. Deseja continuar?"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O AppRinse irá remover a arquitetura %@ do arquivo executável de %@ para economizar espaço. Deseja continuar?"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse удалит архитектуру %@ из исполняемого файла %@ для экономии места. Хотите продолжить?"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse odstráni architektúru %@ z vykonávacieho súboru %@, aby ušetril miesto. Chcete pokračovať?"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse bo odstranil arhitekturo %@ iz izvedljive datoteke %@, da prihrani prostor. Želite nadaljevati?"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse, alan kazanmak için %@'nin çalıştırılabilir dosyasından %@ mimarisini kaldıracak. Devam etmek istiyor musunuz?"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse видалить архітектуру %@ з виконуваного файлу %@, щоб заощадити місце. Бажаєте продовжити?"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse sẽ loại bỏ kiến trúc %@ khỏi tập tin thực thi của %@ để tiết kiệm không gian. Bạn có muốn tiếp tục không?"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse将从%@的可执行文件中剥离%@架构以节省空间。您想继续吗？"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse將從%@的可執行文件中剝離%@架構以節省空間。您想繼續嗎？"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse將會從%@的可執行檔中移除%@架構以節省空間。你想繼續嗎？"
+          }
+        }
+      }
+    },
     "Approximate Savings" : {
       "localizations" : {
         "de" : {
@@ -11978,6 +12713,12 @@
         }
       }
     },
+    "Authenticate to move protected files to the Trash." : {
+
+    },
+    "Authenticate to restore protected files." : {
+
+    },
     "Authorization required in Settings > Login Items > %@.app." : {
       "localizations" : {
         "de" : {
@@ -12451,7 +13192,11 @@
         }
       }
     },
+    "Available" : {
+
+    },
     "Available:" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -15995,6 +16740,9 @@
         }
       }
     },
+    "Check the configured application folders in Settings." : {
+
+    },
     "Checking..." : {
       "localizations" : {
         "de" : {
@@ -17057,6 +17805,9 @@
           }
         }
       }
+    },
+    "Clear Search" : {
+
     },
     "Clear text" : {
       "extractionState" : "manual",
@@ -19663,6 +20414,9 @@
           }
         }
       }
+    },
+    "Current utility: %@" : {
+
     },
     "Custom Sensitivity" : {
       "localizations" : {
@@ -24978,6 +25732,7 @@
       }
     },
     "Drag to expand into grid mode" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -25213,6 +25968,9 @@
           }
         }
       }
+    },
+    "Drop applications to inspect" : {
+
     },
     "Drop files or folders above or click to add" : {
       "extractionState" : "manual",
@@ -25688,6 +26446,9 @@
           }
         }
       }
+    },
+    "Eject %@" : {
+
     },
     "Elapsed Time: %@" : {
       "localizations" : {
@@ -26634,7 +27395,11 @@
         }
       }
     },
+    "Enabling the CLI will allow you to execute AppRinse actions from Terminal. This adds the apprinse command to /usr/local/bin so it is available directly from your PATH. Try it after enabling:\n\n> apprinse --help" : {
+
+    },
     "Enabling the CLI will allow you to execute AppRinse actions from the Terminal. This will add pearcleaner command into /usr/local/bin so it's available directly from your PATH environment variable. Try it after enabling:\n\n> pear --help" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -27578,6 +28343,10 @@
           }
         }
       }
+    },
+    "Essentials" : {
+      "comment" : "A section in the utility switcher menu.",
+      "isCommentAutoGenerated" : true
     },
     "Everything in Enhanced plus adds company name and team identifier. Searches file contents, metadata, Finder comments, and files created by the app. Most comprehensive cleanup, finds all resources associated with the app and the developer, even other apps they create." : {
       "localizations" : {
@@ -41414,6 +42183,9 @@
         }
       }
     },
+    "List Options" : {
+
+    },
     "List View" : {
       "localizations" : {
         "de" : {
@@ -42596,6 +43368,9 @@
           }
         }
       }
+    },
+    "Loading storage" : {
+
     },
     "Loading taps..." : {
       "localizations" : {
@@ -51701,6 +52476,9 @@
         }
       }
     },
+    "Open Storage Settings" : {
+
+    },
     "Open System Settings" : {
       "localizations" : {
         "de" : {
@@ -53469,719 +54247,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "路徑：%@"
-          }
-        }
-      }
-    },
-    "AppRinse and all of its files will be cleanly removed, are you sure?" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse und alle seine Dateien werden sauber entfernt, sind Sie sicher?"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "¿Está seguro de que desea eliminar AppRinse y todos sus archivos?"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse et tous ses fichiers seront supprimés, êtes-vous sûr(e) ?"
-          }
-        },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse dan semua filenya akan dihapus dengan bersih, apakah Anda yakin?"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse e tutti i suoi file verranno rimossi completamente, sei sicuro?"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse とそのすべてのファイルが完全に削除されます。よろしいですか？"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse와 그 모든 파일이 깨끗하게 제거됩니다. 확실합니까?"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse i wszystkie jego pliki zostaną całkowicie usunięte. Czy na pewno chcesz to zrobić?"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "O AppRinse e todos os seus arquivos serão removidos de forma limpa, tem certeza?"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "O AppRinse e todos os seus ficheiros serão removidos de forma limpa, tem a certeza?"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse и все его файлы будут полностью удалены, вы уверены?"
-          }
-        },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse a všetky jeho súbory budú úplne odstránené, si si istý?"
-          }
-        },
-        "sl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse in vse njegove datoteke bodo čisto odstranjene, ste prepričani?"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse ve onun tüm dosyaları tamamen kaldırılacak, emin misiniz?"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse і всі його файли буде повністю видалено, ви впевнені?"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse và tất cả các tệp của nó sẽ bị gỡ bỏ sạch sẽ, bạn có chắc chắn không?"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse 及其所有文件将被干净地移除，您确定吗？"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse 及其全部檔案將會完全移除，你確定嗎？"
-          }
-        },
-        "zh-HK" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse 及其全部檔案將會完全移除，你確定嗎？"
-          }
-        }
-      }
-    },
-    "AppRinse CLI support" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse CLI Unterstützung"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Soporte para AppRinse CLI"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ajouter AppRinse à l’interface de ligne de commande"
-          }
-        },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dukungan CLI/Baris Perintah AppRinse"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Supporto CLI AppRinse"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse CLI サポート"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse CLI 지원"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Obsługa AppRinse CLI"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Suporte CLI do AppRinse"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Suporte CLI do AppRinse"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Поддержка CLI AppRinse"
-          }
-        },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse CLI podpora"
-          }
-        },
-        "sl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Podpora za AppRinse CLI"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse CLI desteği"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Підтримка AppRinse CLI"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hỗ trợ sử dụng AppRinse bằng dòng lệnh"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse CLI 支持"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse 命令列介面（CLI）支援"
-          }
-        },
-        "zh-HK" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse 命令列介面（CLI）支援"
-          }
-        }
-      }
-    },
-    "AppRinse requires permissions to search all system locations comprehensively." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse benötigt Berechtigungen, um alle Systemstandorte umfassend zu durchsuchen."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse requiere permisos para buscar en todas las ubicaciones del sistema de manera exhaustiva."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse nécessite des autorisations pour rechercher de manière exhaustive tous les emplacements système."
-          }
-        },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse memerlukan izin untuk mencari semua lokasi sistem secara menyeluruh."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse richiede autorizzazioni per cercare in modo completo tutte le posizioni di sistema."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse はすべてのシステムの場所を包括的に検索するための権限が必要です。"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse는 모든 시스템 위치를 포괄적으로 검색하기 위해 권한이 필요합니다."
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse wymaga uprawnień do kompleksowego przeszukiwania wszystkich lokalizacji systemowych."
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse requer permissões para pesquisar de forma abrangente todos os locais do sistema."
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse requer permissões para pesquisar todos os locais do sistema de forma abrangente."
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse требует разрешений для всестороннего поиска по всем системным местоположениям."
-          }
-        },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse vyžaduje povolenia na komplexné prehľadávanie všetkých systémových umiestnení."
-          }
-        },
-        "sl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse potrebuje dovoljenja za celovito iskanje po vseh sistemskih lokacijah."
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse, tüm sistem konumlarını kapsamlı bir şekilde aramak için izin gerektirir."
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse потребує дозволів для всебічного пошуку у всіх системних місцях."
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse yêu cầu quyền để tìm kiếm toàn diện tất cả các vị trí hệ thống."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse 需要权限来全面搜索所有系统位置。"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse 需要權限來全面搜索所有系統位置。"
-          }
-        },
-        "zh-HK" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse 需要權限來全面搜尋所有系統位置。"
-          }
-        }
-      }
-    },
-    "AppRinse Uninstall" : {
-      "comment" : "Right click context menu item when using the Finder extension to uninstall using AppRinse",
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse Deinstallation"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Desinstalar AppRinse"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Désinstaller avec AppRinse"
-          }
-        },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Copot AppRinse"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Disinstalla AppRinse"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinseでアンインストール"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse 제거"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Odinstaluj za pomocą AppRinse"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Desinstalar o AppRinse"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Desinstalar AppRinse"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Удалить через AppRinse"
-          }
-        },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Odinštalovať AppRinseom"
-          }
-        },
-        "sl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Odstrani AppRinse"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse ile Kaldırma"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Видалити через AppRinse"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gỡ cài đặt AppRinse"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse 卸载"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse 解除安裝"
-          }
-        },
-        "zh-HK" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse 解除安裝"
-          }
-        }
-      }
-    },
-    "AppRinse will ask you to enter your password once to enable the helper, then all subsequent privileged operations will run without any other prompts as long as the helper stays enabled in Settings > Login Items. This authorization is all managed by macOS via SMAppService." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse wird Sie einmal nach Ihrem Passwort fragen, um den Helfer zu aktivieren, dann werden alle nachfolgenden privilegierten Operationen ohne weitere Aufforderungen ausgeführt, solange der Helfer in Einstellungen > Anmeldeobjekte aktiviert bleibt. Diese Autorisierung wird von macOS über SMAppService verwaltet."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse te pedirá que ingreses tu contraseña una vez para habilitar el asistente, luego todas las operaciones privilegiadas posteriores se ejecutarán sin ningún otro aviso mientras el asistente permanezca habilitado en Configuración > Elementos de inicio de sesión. Esta autorización es gestionada por macOS a través de SMAppService."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse vous demandera de saisir votre mot de passe une fois pour activer l'assistant, puis toutes les opérations privilégiées suivantes s'exécuteront sans aucune autre invite tant que l'assistant reste activé dans Réglages > Éléments de connexion. Cette autorisation est gérée par macOS via SMAppService."
-          }
-        },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse akan meminta Anda memasukkan kata sandi sekali untuk mengaktifkan pembantu, kemudian semua operasi istimewa berikutnya akan berjalan tanpa permintaan lain selama pembantu tetap diaktifkan di Pengaturan > Item Masuk. Otorisasi ini dikelola oleh macOS melalui SMAppService."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse ti chiederà di inserire la tua password una volta per abilitare l'assistente, quindi tutte le operazioni privilegiate successive verranno eseguite senza altri avvisi finché l'assistente rimane abilitato in Impostazioni > Elementi di accesso. Questa autorizzazione è gestita da macOS tramite SMAppService."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse は、ヘルパーを有効にするために一度だけパスワードを入力するよう求め、その後、ヘルパーが設定 > ログイン項目で有効なままである限り、すべての後続の特権操作は他のプロンプトなしで実行されます。この承認は macOS によって SMAppService 経由で管理されます。"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse는 도우미를 활성화하기 위해 한 번 비밀번호를 입력하도록 요청한 후, 도우미가 설정 > 로그인 항목에서 활성화된 상태로 유지되는 한 모든 후속 권한 작업은 다른 프롬프트 없이 실행됩니다. 이 권한 부여는 SMAppService를 통해 macOS에서 관리됩니다."
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse poprosi Cię o podanie hasła raz, aby włączyć pomocnika, a następnie wszystkie kolejne operacje uprzywilejowane będą działać bez żadnych innych monitów, dopóki pomocnik pozostaje włączony w Ustawieniach > Elementy logowania. Ta autoryzacja jest zarządzana przez macOS za pośrednictwem SMAppService."
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "O AppRinse pedirá que você insira sua senha uma vez para ativar o assistente, então todas as operações privilegiadas subsequentes serão executadas sem qualquer outro aviso, desde que o assistente permaneça ativado em Configurações > Itens de Login. Esta autorização é gerenciada pelo macOS via SMAppService."
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "O AppRinse pedirá que você insira sua senha uma vez para habilitar o assistente, então todas as operações privilegiadas subsequentes serão executadas sem outros avisos, desde que o assistente permaneça habilitado em Ajustes > Itens de Início de Sessão. Esta autorização é toda gerida pelo macOS via SMAppService."
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse попросит вас ввести пароль один раз, чтобы включить помощник, после чего все последующие привилегированные операции будут выполняться без дополнительных запросов, пока помощник остается включенным в Настройки > Элементы входа. Это разрешение управляется macOS через SMAppService."
-          }
-        },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse vás požiada o zadanie hesla raz na povolenie pomocníka, potom všetky nasledujúce privilegované operácie budú prebiehať bez ďalších výziev, pokiaľ pomocník zostane povolený v Nastaveniach > Položky prihlásenia. Toto overenie je spravované systémom macOS prostredníctvom SMAppService."
-          }
-        },
-        "sl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse vas bo prosil, da enkrat vnesete geslo za omogočanje pomočnika, nato pa bodo vse nadaljnje privilegirane operacije potekale brez drugih pozivov, dokler bo pomočnik ostal omogočen v Nastavitve > Elementi za prijavo. To avtorizacijo upravlja macOS prek SMAppService."
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse, yardımcıyı etkinleştirmek için sizden bir kez şifrenizi girmenizi isteyecek, ardından yardımcı Ayarlar > Giriş Öğeleri'nde etkin kaldığı sürece tüm sonraki ayrıcalıklı işlemler başka bir uyarı olmadan çalışacaktır. Bu yetkilendirme, macOS tarafından SMAppService aracılığıyla yönetilir."
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse попросить вас ввести пароль один раз, щоб увімкнути помічника, після чого всі наступні привілейовані операції будуть виконуватися без будь-яких інших запитів, доки помічник залишається увімкненим у Налаштуваннях > Елементи входу. Ця авторизація керується macOS через SMAppService."
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse sẽ yêu cầu bạn nhập mật khẩu một lần để kích hoạt trình trợ giúp, sau đó tất cả các thao tác đặc quyền tiếp theo sẽ chạy mà không có bất kỳ lời nhắc nào khác miễn là trình trợ giúp vẫn được bật trong Cài đặt > Mục đăng nhập. Sự ủy quyền này được quản lý bởi macOS thông qua SMAppService."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse 会要求您输入密码一次以启用助手，然后所有后续的特权操作将在没有其他提示的情况下运行，只要助手在设置 > 登录项中保持启用状态。此授权由 macOS 通过 SMAppService 管理。"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse 會要求您輸入密碼一次以啟用助手，然後所有後續的特權操作將在不提示的情況下運行，只要助手在設定 > 登入項目中保持啟用狀態。此授權由 macOS 通過 SMAppService 管理。"
-          }
-        },
-        "zh-HK" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse 會要求您輸入密碼一次以啟用助手，然後所有後續的特權操作將在不提示的情況下運行，只要助手在設定 > 登入項目中保持啟用狀態。此授權由 macOS 通過 SMAppService 管理。"
-          }
-        }
-      }
-    },
-    "AppRinse will strip the %@ architecture from %@'s executable file to save space. Would you like to proceed?" : {
-      "comment" : "Lipo alert message",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse wird die %@-Architektur aus der ausführbaren Datei von %@ entfernen, um Speicherplatz zu sparen. Möchten Sie fortfahren?"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse eliminará la arquitectura %@ del archivo ejecutable de %@ para ahorrar espacio. ¿Desea continuar?"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse supprimera l'architecture %@ du fichier exécutable de %@ pour économiser de l'espace. Voulez-vous continuer ?"
-          }
-        },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse akan menghapus arsitektur %@ dari file eksekusi %@ untuk menghemat ruang. Apakah Anda ingin melanjutkan?"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse rimuoverà l'architettura %@ dal file eseguibile di %@ per risparmiare spazio. Vuoi procedere?"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinseは、スペースを節約するために%@の実行可能ファイルから%@アーキテクチャを削除します。続行しますか？"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse가 공간을 절약하기 위해 %@의 실행 파일에서 %@ 아키텍처를 제거합니다. 계속하시겠습니까?"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse usunie architekturę %@ z pliku wykonywalnego %@, aby zaoszczędzić miejsce. Czy chcesz kontynuować?"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse removerá a arquitetura %@ do arquivo executável de %@ para economizar espaço. Deseja continuar?"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "O AppRinse irá remover a arquitetura %@ do arquivo executável de %@ para economizar espaço. Deseja continuar?"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse удалит архитектуру %@ из исполняемого файла %@ для экономии места. Хотите продолжить?"
-          }
-        },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse odstráni architektúru %@ z vykonávacieho súboru %@, aby ušetril miesto. Chcete pokračovať?"
-          }
-        },
-        "sl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse bo odstranil arhitekturo %@ iz izvedljive datoteke %@, da prihrani prostor. Želite nadaljevati?"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse, alan kazanmak için %@'nin çalıştırılabilir dosyasından %@ mimarisini kaldıracak. Devam etmek istiyor musunuz?"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse видалить архітектуру %@ з виконуваного файлу %@, щоб заощадити місце. Бажаєте продовжити?"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse sẽ loại bỏ kiến trúc %@ khỏi tập tin thực thi của %@ để tiết kiệm không gian. Bạn có muốn tiếp tục không?"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse将从%@的可执行文件中剥离%@架构以节省空间。您想继续吗？"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse將從%@的可執行文件中剝離%@架構以節省空間。您想繼續嗎？"
-          }
-        },
-        "zh-HK" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse將會從%@的可執行檔中移除%@架構以節省空間。你想繼續嗎？"
           }
         }
       }
@@ -56672,7 +56737,14 @@
         }
       }
     },
+    "Purgeable" : {
+
+    },
+    "Purgeable space is managed automatically by macOS and cannot be freed manually." : {
+
+    },
     "Purgeable space refers to the System Data taken up by macOS. This cannot be manually freed and is automatically managed by your system." : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -56791,6 +56863,7 @@
       }
     },
     "Purgeable:" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -68611,6 +68684,7 @@
       }
     },
     "Select an app from the sidebar to begin" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -68845,6 +68919,9 @@
           }
         }
       }
+    },
+    "Select an application from the sidebar to inspect and clean its files." : {
+
     },
     "Select an environment to view stored cache" : {
       "localizations" : {
@@ -75941,6 +76018,12 @@
         }
       }
     },
+    "Storage" : {
+
+    },
+    "Storage information will appear here shortly." : {
+
+    },
     "Strict" : {
       "localizations" : {
         "de" : {
@@ -77480,6 +77563,7 @@
       }
     },
     "The search sensitivity level controls how strict or lenient AppRinse is when finding related files for an app:\n\n• Strict – %@\n\n• Enhanced – %@\n\n• Deep – %@\n\nAt levels higher than Strict it is recommended to check found files manually." : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -77599,6 +77683,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "搜尋敏感度級別控制 AppRinse 在尋找應用程式相關檔案時的嚴格或寬鬆程度：\n\n• 嚴格 – %@\n\n• 增強 – %@\n\n• 深入 – %@\n\n在高於嚴格的級別，建議手動檢查找到的檔案。"
+          }
+        }
+      }
+    },
+    "The search sensitivity level controls how strict or lenient Pearcleaner is when finding related files for an app:\n\n• Strict – %@\n\n• Enhanced – %@\n\n• Deep – %@\n\nAt levels higher than Strict it is recommended to check found files manually." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The search sensitivity level controls how strict or lenient Pearcleaner is when finding related files for an app:\n\n• Strict – %1$@\n\n• Enhanced – %2$@\n\n• Deep – %3$@\n\nAt levels higher than Strict it is recommended to check found files manually."
           }
         }
       }
@@ -81861,6 +81955,9 @@
         }
       }
     },
+    "Try another application name." : {
+
+    },
     "Type" : {
       "localizations" : {
         "de" : {
@@ -82807,6 +82904,125 @@
         }
       }
     },
+    "Uninstall AppRinse" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse deinstallieren"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desinstalar AppRinse"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Désinstaller AppRinse"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copot AppRinse"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Disinstalla AppRinse"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinseをアンインストール"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse 제거"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Odinstaluj AppRinse"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desinstalar AppRinse"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desinstalar AppRinse"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Удалить AppRinse"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Odinštalovať AppRinse"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Odstrani AppRinse"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppRinse’ı Kaldır"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Видалити AppRinse"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gỡ cài đặt AppRinse"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "卸载 AppRinse"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "解除安裝 AppRinse"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "解除安裝 AppRinse"
+          }
+        }
+      }
+    },
     "Uninstall confirmation alerts" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -83040,125 +83256,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "解除安裝套件"
-          }
-        }
-      }
-    },
-    "Uninstall AppRinse" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse deinstallieren"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Desinstalar AppRinse"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Désinstaller AppRinse"
-          }
-        },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Copot AppRinse"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Disinstalla AppRinse"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinseをアンインストール"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse 제거"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Odinstaluj AppRinse"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Desinstalar AppRinse"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Desinstalar AppRinse"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Удалить AppRinse"
-          }
-        },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Odinštalovať AppRinse"
-          }
-        },
-        "sl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Odstrani AppRinse"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AppRinse’ı Kaldır"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Видалити AppRinse"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gỡ cài đặt AppRinse"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "卸载 AppRinse"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "解除安裝 AppRinse"
-          }
-        },
-        "zh-HK" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "解除安裝 AppRinse"
           }
         }
       }
@@ -87535,6 +87632,9 @@
         }
       }
     },
+    "Used" : {
+
+    },
     "User" : {
       "localizations" : {
         "de" : {
@@ -87770,6 +87870,9 @@
           }
         }
       }
+    },
+    "User profile" : {
+
     },
     "user/tap" : {
       "localizations" : {
