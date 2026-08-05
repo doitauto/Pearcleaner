@@ -33,8 +33,8 @@ if [[ -z "$signing_identity" || "$signing_identity" == "-" ]]; then
 fi
 
 if [[ -z "$signing_identity" ]]; then
-    echo "error: no Apple Distribution signing identity is available" >&2
-    exit 1
+    echo "warning: no Apple Distribution signing identity is available; the archive signing will be finalized by Xcode Cloud export" >&2
+    exit 0
 fi
 
 typeset -a app_candidates
