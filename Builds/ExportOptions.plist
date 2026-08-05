@@ -5,11 +5,11 @@
 	<key>method</key>
 	<string>mac-application</string>
 	<key>teamID</key>
-	<string>BK8443AXLU</string>
+	<string>GELUY8U5D6</string>
 	<key>signingCertificate</key>
-	<string>Developer ID Application: Marius Lupascu (BK8443AXLU)</string>
+	<string>Apple Development</string>
 	<key>signingStyle</key>
-	<string>manual</string>
+	<string>automatic</string>
 	<key>stripSwiftSymbols</key>
 	<true/>
 	<key>destination</key>

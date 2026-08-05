@@ -10,7 +10,7 @@ import AppKit
 import OSLog
 
 private let logger = Logger(
-    subsystem: "com.alienator88.Pearcleaner",
+    subsystem: "com.doitauto.Pearcleaner",
     category: "Sentinel"
 )
 
@@ -78,7 +78,7 @@ func checkApp(file: String) {
         return
     }
 
-    guard appBundle.bundleIdentifier != "com.alienator88.Pearcleaner" else {
+    guard appBundle.bundleIdentifier != "com.doitauto.Pearcleaner" else {
         logger.debug("Ignoring Pearcleaner's own app bundle")
         return
     }

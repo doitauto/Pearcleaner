@@ -16,7 +16,7 @@
 		C72FDCB92D6D089100DE7D56 /* UndoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72FDCB82D6D088A00DE7D56 /* UndoManager.swift */; };
 		C73545EB2D8496E000A3DC0C /* HelperToolManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73545EA2D8496DA00A3DC0C /* HelperToolManager.swift */; };
 		C73545F92D849B5700A3DC0C /* PearcleanerHelper in CopyFiles */ = {isa = PBXBuildFile; fileRef = C73545F02D849A1B00A3DC0C /* PearcleanerHelper */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		C73545FD2D84E5DD00A3DC0C /* com.alienator88.PearcleanerSentinel.plist in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7B3AB072D83900B00D829C5 /* com.alienator88.PearcleanerSentinel.plist */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		C73545FD2D84E5DD00A3DC0C /* com.doitauto.PearcleanerSentinel.plist in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7B3AB072D83900B00D829C5 /* com.doitauto.PearcleanerSentinel.plist */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		C739C3382EB027A9003639C6 /* askpass.sh in Resources */ = {isa = PBXBuildFile; fileRef = C739C3372EB027A9003639C6 /* askpass.sh */; };
 		C73AE1922EC69A81009CAC42 /* GlobalConsoleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73AE1912EC69A81009CAC42 /* GlobalConsoleManager.swift */; };
 		C74206E52E79E47400BDDB6A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C74206E42E79E47400BDDB6A /* Assets.xcassets */; };
@@ -123,7 +123,7 @@
 			dstPath = Contents/Library/LaunchAgents;
 			dstSubfolderSpec = 1;
 			files = (
-				C73545FD2D84E5DD00A3DC0C /* com.alienator88.PearcleanerSentinel.plist in CopyFiles */,
+				C73545FD2D84E5DD00A3DC0C /* com.doitauto.PearcleanerSentinel.plist in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,7 +169,7 @@
 		C78FF5E22EC1B1E100FC610A /* KeychainPasswordManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainPasswordManager.swift; sourceTree = "<group>"; };
 		C7A2A4D52DDB957D006E05E4 /* CLI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLI.swift; sourceTree = "<group>"; };
 		C7A6DBF02C9DD27200CFA042 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		C7B3AB072D83900B00D829C5 /* com.alienator88.PearcleanerSentinel.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = com.alienator88.PearcleanerSentinel.plist; sourceTree = "<group>"; };
+		C7B3AB072D83900B00D829C5 /* com.doitauto.PearcleanerSentinel.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = com.doitauto.PearcleanerSentinel.plist; sourceTree = "<group>"; };
 		C7BB99282E8AF1CB007BBB81 /* PluginsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginsView.swift; sourceTree = "<group>"; };
 		C7BB992E2E8B225F007BBB81 /* FileSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSearchView.swift; sourceTree = "<group>"; };
 		C7C90DD22DA81C590056769A /* Lipo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lipo.swift; sourceTree = "<group>"; };
@@ -222,13 +222,13 @@
 		C73545FC2D849B7E00A3DC0C /* PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
 			attributesByRelativePath = {
-				com.alienator88.Pearcleaner.PearcleanerHelper.plist = (
+				com.doitauto.Pearcleaner.PearcleanerHelper.plist = (
 					CodeSignOnCopy,
 				);
 			};
 			buildPhase = C73545FA2D849B6900A3DC0C /* CopyFiles */;
 			membershipExceptions = (
-				com.alienator88.Pearcleaner.PearcleanerHelper.plist,
+				com.doitauto.Pearcleaner.PearcleanerHelper.plist,
 			);
 		};
 /* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
@@ -325,7 +325,7 @@
 		C72893102AFD51EA00C8C1CD /* PearcleanerSentinel */ = {
 			isa = PBXGroup;
 			children = (
-				C7B3AB072D83900B00D829C5 /* com.alienator88.PearcleanerSentinel.plist */,
+				C7B3AB072D83900B00D829C5 /* com.doitauto.PearcleanerSentinel.plist */,
 				C78733BC2E674496008615F2 /* FileWatcher.swift */,
 				C72893112AFD51EA00C8C1CD /* main.swift */,
 			);
@@ -724,18 +724,18 @@
 				APP_BUILD = "$(APP_BUILD)";
 				APP_VERSION = "$(APP_VERSION)";
 				CODE_SIGN_ENTITLEMENTS = "";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Developer ID Application";
-				CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = "$(APP_BUILD)";
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=macosx*]" = BK8443AXLU;
+				DEVELOPMENT_TEAM = GELUY8U5D6;
+				"DEVELOPMENT_TEAM[sdk=macosx*]" = GELUY8U5D6;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
 				INSTALL_PATH = "";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = "$(APP_VERSION)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.alienator88.PearcleanerSentinel;
+				PRODUCT_BUNDLE_IDENTIFIER = com.doitauto.PearcleanerSentinel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -749,18 +749,18 @@
 				APP_BUILD = "$(APP_BUILD)";
 				APP_VERSION = "$(APP_VERSION)";
 				CODE_SIGN_ENTITLEMENTS = "";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Developer ID Application";
-				CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = "$(APP_BUILD)";
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=macosx*]" = BK8443AXLU;
+				DEVELOPMENT_TEAM = GELUY8U5D6;
+				"DEVELOPMENT_TEAM[sdk=macosx*]" = GELUY8U5D6;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
 				INSTALL_PATH = "";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = "$(APP_VERSION)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.alienator88.PearcleanerSentinel;
+				PRODUCT_BUNDLE_IDENTIFIER = com.doitauto.PearcleanerSentinel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -772,16 +772,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Developer ID Application";
-				CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = "$(APP_BUILD)";
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=macosx*]" = BK8443AXLU;
+				DEVELOPMENT_TEAM = GELUY8U5D6;
+				"DEVELOPMENT_TEAM[sdk=macosx*]" = GELUY8U5D6;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INSTALL_PATH = "";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = "$(APP_VERSION)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.alienator88.Pearcleaner.PearcleanerHelper;
+				PRODUCT_BUNDLE_IDENTIFIER = com.doitauto.Pearcleaner.PearcleanerHelper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
@@ -794,17 +794,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Developer ID Application";
-				CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = "$(APP_BUILD)";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=macosx*]" = BK8443AXLU;
+				DEVELOPMENT_TEAM = GELUY8U5D6;
+				"DEVELOPMENT_TEAM[sdk=macosx*]" = GELUY8U5D6;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INSTALL_PATH = "";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = "$(APP_VERSION)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.alienator88.Pearcleaner.PearcleanerHelper;
+				PRODUCT_BUNDLE_IDENTIFIER = com.doitauto.Pearcleaner.PearcleanerHelper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
@@ -962,15 +962,15 @@
 				ASSETCATALOG_COMPILER_SKIP_APP_STORE_DEPLOYMENT = YES;
 				ASSETCATALOG_COMPILER_STANDALONE_ICON_BEHAVIOR = default;
 				CODE_SIGN_ENTITLEMENTS = Pearcleaner/Resources/Pearcleaner.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Developer ID Application";
-				CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = "$(APP_BUILD)";
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "";
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=macosx*]" = BK8443AXLU;
+				DEVELOPMENT_TEAM = GELUY8U5D6;
+				"DEVELOPMENT_TEAM[sdk=macosx*]" = GELUY8U5D6;
 				ENABLE_APP_SANDBOX = NO;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -994,10 +994,9 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "";
 				OTHER_SWIFT_FLAGS = "-Xcc -fmodule-map-file=$(SRCROOT)/Pearcleaner/Logic/AppsUpdater/PrivateFrameworks/CommerceKit/module.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/Pearcleaner/Logic/AppsUpdater/PrivateFrameworks/StoreFoundation/module.modulemap";
-				PRODUCT_BUNDLE_IDENTIFIER = com.alienator88.Pearcleaner;
+				PRODUCT_BUNDLE_IDENTIFIER = com.doitauto.Pearcleaner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "M1 Pro Signed - Pearcleaner";
 				REGISTER_APP_GROUPS = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Pearcleaner/Logic/PKG/Pearcleaner-Bridging-Header.h";
@@ -1020,15 +1019,15 @@
 				ASSETCATALOG_COMPILER_SKIP_APP_STORE_DEPLOYMENT = YES;
 				ASSETCATALOG_COMPILER_STANDALONE_ICON_BEHAVIOR = default;
 				CODE_SIGN_ENTITLEMENTS = Pearcleaner/Resources/Pearcleaner.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Developer ID Application";
-				CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = "$(APP_BUILD)";
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "";
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=macosx*]" = BK8443AXLU;
+				DEVELOPMENT_TEAM = GELUY8U5D6;
+				"DEVELOPMENT_TEAM[sdk=macosx*]" = GELUY8U5D6;
 				ENABLE_APP_SANDBOX = NO;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -1051,10 +1050,9 @@
 				MARKETING_VERSION = "$(APP_VERSION)";
 				OTHER_LDFLAGS = "";
 				OTHER_SWIFT_FLAGS = "-Xcc -fmodule-map-file=$(SRCROOT)/Pearcleaner/Logic/AppsUpdater/PrivateFrameworks/CommerceKit/module.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/Pearcleaner/Logic/AppsUpdater/PrivateFrameworks/StoreFoundation/module.modulemap";
-				PRODUCT_BUNDLE_IDENTIFIER = com.alienator88.Pearcleaner;
+				PRODUCT_BUNDLE_IDENTIFIER = com.doitauto.Pearcleaner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "M1 Pro Signed - Pearcleaner";
 				REGISTER_APP_GROUPS = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Pearcleaner/Logic/PKG/Pearcleaner-Bridging-Header.h";
@@ -1073,12 +1071,12 @@
 				APP_BUILD = "$(APP_BUILD)";
 				APP_VERSION = "$(APP_VERSION)";
 				CODE_SIGN_ENTITLEMENTS = FinderOpen/FinderOpen.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Developer ID Application";
-				CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = "$(APP_BUILD)";
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=macosx*]" = BK8443AXLU;
+				DEVELOPMENT_TEAM = GELUY8U5D6;
+				"DEVELOPMENT_TEAM[sdk=macosx*]" = GELUY8U5D6;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FinderOpen/Info.plist;
@@ -1093,10 +1091,9 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = "$(APP_VERSION)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.alienator88.Pearcleaner.FinderOpen;
+				PRODUCT_BUNDLE_IDENTIFIER = com.doitauto.Pearcleaner.FinderOpen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "Pearcleaner Finder Extension";
 				REGISTER_APP_GROUPS = YES;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1110,12 +1107,12 @@
 				APP_BUILD = "$(APP_BUILD)";
 				APP_VERSION = "$(APP_VERSION)";
 				CODE_SIGN_ENTITLEMENTS = FinderOpen/FinderOpen.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Developer ID Application";
-				CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = "$(APP_BUILD)";
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=macosx*]" = BK8443AXLU;
+				DEVELOPMENT_TEAM = GELUY8U5D6;
+				"DEVELOPMENT_TEAM[sdk=macosx*]" = GELUY8U5D6;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GCC_OPTIMIZATION_LEVEL = "";
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1131,10 +1128,9 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = "$(APP_VERSION)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.alienator88.Pearcleaner.FinderOpen;
+				PRODUCT_BUNDLE_IDENTIFIER = com.doitauto.Pearcleaner.FinderOpen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "Pearcleaner Finder Extension";
 				REGISTER_APP_GROUPS = YES;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;

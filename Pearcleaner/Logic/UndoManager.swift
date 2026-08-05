@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import AlinFoundation
+import LocalAuthentication
 
 class FileManagerUndo {
     // MARK: - Singleton Instance
@@ -233,6 +234,18 @@ class FileManagerUndo {
 
         // Try privileged wrapper (helper tool or Authorization Services)
         Task {
+            if hasProtectedFiles && !isCLI {
+                let reason = isRestore
+                    ? String(localized: "Authenticate to restore protected files.")
+                    : String(localized: "Authenticate to move protected files to the Trash.")
+
+                guard await authenticatePrivilegedAction(reason: reason) else {
+                    printOS(isRestore ? "Restore authentication cancelled" : "Trash authentication cancelled")
+                    semaphore.signal()
+                    return
+                }
+            }
+
             let result = try! await runSUCommand(
                 commands,
                 errorContext: isRestore ? "Undo restore operation failed" : "Undo delete operation failed",
@@ -264,6 +277,29 @@ class FileManagerUndo {
         semaphore.wait()
 
         return status
+    }
+
+    private func authenticatePrivilegedAction(reason: String) async -> Bool {
+        let context = LAContext()
+        context.localizedCancelTitle = String(localized: "Cancel")
+
+        var evaluationError: NSError?
+        guard context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &evaluationError) else {
+            if let evaluationError {
+                printOS("Device owner authentication unavailable: \(evaluationError.localizedDescription)")
+            }
+            return false
+        }
+
+        do {
+            return try await context.evaluatePolicy(
+                .deviceOwnerAuthentication,
+                localizedReason: reason
+            )
+        } catch {
+            printOS("Device owner authentication failed: \(error.localizedDescription)")
+            return false
+        }
     }
 
     // Helper to run direct non-privileged shell commands
