@@ -48,29 +48,19 @@ func createOptimalChunks<T>(from array: [T], minChunkSize: Int = 10, maxChunkSiz
     return array.chunked(into: chunkSize)
 }
 
-/// Flush bundle caches for the given app paths to ensure fresh version info
-/// - Parameter apps: Array of AppInfo objects whose bundles should have caches flushed
-/// - Discussion: (NS)Bundle caches Info.plist data. After app updates, old version info may be
-///               returned. Flushing the cache using private API ensures current data is read.
+/// Clears public URL resource caches for the given app paths.
+/// - Parameter apps: App metadata whose paths should be refreshed.
 func flushBundleCaches(for apps: [AppInfo]) {
     for app in apps {
-        autoreleasepool {
-            guard let bundle = Bundle(url: app.path) else { return }
-            if let bundleRef = CFBundleCreate(nil, bundle.bundleURL as CFURL) {
-                _CFBundleFlushBundleCaches(bundleRef)
-            }
-        }
+        var path = app.path
+        path.removeAllCachedResourceValues()
     }
 }
 
-/// Flush bundle cache for a specific path (without requiring AppInfo object)
-/// Used when loading newly installed apps where bundle cache might be stale
+/// Clears public URL resource caches for a specific app path.
 func flushBundleCache(for path: URL) {
-    autoreleasepool {
-        if let bundleRef = CFBundleCreate(nil, path as CFURL) {
-            _CFBundleFlushBundleCaches(bundleRef)
-        }
-    }
+    var mutablePath = path
+    mutablePath.removeAllCachedResourceValues()
 }
 
 /// Load apps from specified folder paths and update AppState
@@ -995,12 +985,11 @@ private func buildCaskLookupTable() -> [String: CaskMetadata] {
                             }
                         }
 
-                        // PKG-based casks: Extract app bundles from package receipts
-                        // Uses private PackageKit framework to avoid Process() overhead
+                        // PKG-based casks: Extract app bundles from Installer receipts.
                         if let pkgutilID = uninstall["pkgutil"] as? String {
                             // Find package receipt by ID
                             let allPackages = PKGManager.getAllPackages(volume: "/")
-                            if let receipt = allPackages.first(where: { $0.packageIdentifier() as? String == pkgutilID }) {
+                            if let receipt = allPackages.first(where: { $0.packageIdentifier == pkgutilID }) {
                                 // Get package info to determine install location
                                 guard let packageInfo = PKGManager.getPackageInfo(from: receipt) else {
                                     continue

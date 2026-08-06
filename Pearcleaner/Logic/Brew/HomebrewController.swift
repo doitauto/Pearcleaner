@@ -2177,7 +2177,7 @@ class HomebrewController: ObservableObject {
         var totalSize: Int64 = 0
 
         for identifier in pkgIdentifiers {
-            if let receipt = receipts.first(where: { ($0.packageIdentifier() as? String) == identifier }),
+            if let receipt = receipts.first(where: { $0.packageIdentifier == identifier }),
                let bomInfo = PKGManager.getBOMInfo(for: receipt) {
                 totalSize += bomInfo.totalSize
             }

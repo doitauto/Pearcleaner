@@ -2,184 +2,194 @@
 //  PKGManager.swift
 //  Pearcleaner
 //
-//  Wrapper for Apple's private PackageKit framework APIs
+//  Public wrapper around macOS Installer receipt tools.
 //
 
 import Foundation
-import AlinFoundation
 
-@available(macOS 10.5, *)
-class PKGManager {
+struct PackageReceipt: Hashable, Sendable {
+    let packageIdentifier: String
+    let volume: String
 
-    // MARK: - Package Enumeration
+    init(packageIdentifier: String, volume: String = "/") {
+        self.packageIdentifier = packageIdentifier
+        self.volume = volume
+    }
+}
 
-    /// Get all installed packages on a volume
-    /// - Parameter volume: Volume path (default: "/")
-    /// - Returns: Array of PKReceipt objects
-    static func getAllPackages(volume: String = "/") -> [PKReceipt] {
-        guard let receipts = PKReceipt.receiptsOnVolume(atPath: volume) as? [PKReceipt] else {
-            return []
-        }
-        return receipts
+enum PKGManager {
+    private enum Constants {
+        static let executablePath = "/usr/sbin/pkgutil"
+        static let defaultVolume = "/"
+        static let defaultInstallLocation = "/"
+        static let successfulTerminationStatus: Int32 = 0
+        static let packageIdentifierKey = "pkgid"
+        static let versionKey = "pkg-version"
+        static let installTimeKey = "install-time"
+        static let installLocationKey = "install-location"
+        static let groupsKey = "groups"
+        static let pathsKey = "paths"
+        static let fileSizeKey = "size"
     }
 
-    // MARK: - Package Information
+    private struct CommandResult {
+        let data: Data
+        let terminationStatus: Int32
+    }
 
-    /// Extract package information from a PKReceipt
-    /// - Parameter receipt: PKReceipt object
-    /// - Returns: Structured PackageInfo object
-    static func getPackageInfo(from receipt: PKReceipt) -> PackageInfo? {
-        guard let packageId = receipt.packageIdentifier() as? String else {
+    static func getAllPackages(volume: String = Constants.defaultVolume) -> [PackageReceipt] {
+        guard let result = run(arguments: ["--volume", volume, "--pkgs"]),
+              result.terminationStatus == Constants.successfulTerminationStatus,
+              let output = String(data: result.data, encoding: .utf8) else {
+            return []
+        }
+
+        return output
+            .split(whereSeparator: \.isNewline)
+            .map(String.init)
+            .filter { !$0.isEmpty }
+            .map { PackageReceipt(packageIdentifier: $0, volume: volume) }
+    }
+
+    static func getPackageInfo(from receipt: PackageReceipt) -> PackageInfo? {
+        guard let dictionary = packageInfoDictionary(for: receipt) else {
             return nil
         }
 
-        let packageName = ""
-        let packageFileName = (receipt._packageName() as? String) ?? ""
-        let version = (receipt.packageVersion() as? String) ?? ""
-        let installDate = formatInstallDate(receipt.installDate())
-        let installLocation = (receipt.installPrefixPath() as? String) ?? "/"
-        let installProcessName = (receipt.installProcessName() as? String) ?? ""
-
-        // Get package groups (e.g., com.apple.group.documentation)
-        let packageGroups = (receipt.packageGroups() as? [String]) ?? []
-
-        // Get additional info string if available
-        let additionalInfo = (receipt.additionalInfo() as? String) ?? ""
-
-        // Check if package is secure/signed
-        let isSecure = receipt._isSecure()
-
-        // Get all receipt storage paths
-        let receiptStoragePaths = (receipt.receiptStoragePaths() as? [String]) ?? []
-
-        // Get receipt path (main plist file)
-        let receiptPath = receiptStoragePaths.first(where: { $0.hasSuffix(".plist") })
-            ?? "/var/db/receipts/\(packageId).plist"
-
-        // Get BOM info if available
-        var totalSizeFromBOM: Int64 = 0
-        var totalFilesInBOM: Int = 0
-
-        if let bomInfo = getBOMInfo(for: receipt) {
-            totalSizeFromBOM = bomInfo.totalSize
-            totalFilesInBOM = bomInfo.fileCount
-        }
+        let packageIdentifier = dictionary[Constants.packageIdentifierKey] as? String
+            ?? receipt.packageIdentifier
+        let version = dictionary[Constants.versionKey] as? String ?? ""
+        let installLocation = dictionary[Constants.installLocationKey] as? String
+            ?? Constants.defaultInstallLocation
+        let installDate = formatInstallDate(dictionary[Constants.installTimeKey])
+        let groups = dictionary[Constants.groupsKey] as? [String] ?? []
 
         return PackageInfo(
-            packageId: packageId,
-            packageName: packageName,
-            packageFileName: packageFileName,
+            packageId: packageIdentifier,
+            packageName: "",
+            packageFileName: "",
             version: version,
             installDate: installDate,
-            installProcessName: installProcessName,
+            installProcessName: "",
             bomFiles: [],
-            receiptPath: receiptPath,
+            receiptPath: "",
             installLocation: installLocation,
             bomFilesLoaded: false,
-            packageGroups: packageGroups,
-            additionalInfo: additionalInfo,
-            isSecure: isSecure,
-            receiptStoragePaths: receiptStoragePaths,
-            totalSizeFromBOM: totalSizeFromBOM,
-            totalFilesInBOM: totalFilesInBOM
+            packageGroups: groups,
+            additionalInfo: "",
+            receiptStoragePaths: [],
+            totalSizeFromBOM: 0,
+            totalFilesInBOM: 0
         )
     }
 
-    // MARK: - BOM Operations
-
-    /// Get BOM statistics (size and file count)
-    /// - Parameter receipt: PKReceipt object
-    /// - Returns: Tuple with total size and file count, or nil if BOM not available
-    static func getBOMInfo(for receipt: PKReceipt) -> (totalSize: Int64, fileCount: Int)? {
-        guard let bomPath = findBOMPath(for: receipt) else {
+    static func getBOMInfo(for receipt: PackageReceipt) -> (totalSize: Int64, fileCount: Int)? {
+        guard let result = run(
+            arguments: ["--volume", receipt.volume, "--export-plist", receipt.packageIdentifier]
+        ), result.terminationStatus == Constants.successfulTerminationStatus,
+           let propertyList = try? PropertyListSerialization.propertyList(
+               from: result.data,
+               options: [],
+               format: nil
+           ),
+           let dictionary = propertyList as? [String: Any],
+           let paths = dictionary[Constants.pathsKey] as? [String: [String: Any]] else {
             return nil
         }
 
-        guard let bom = PKBOM(bomPath: bomPath) else {
-            return nil
-        }
+        var totalSize: Int64 = 0
+        var fileCount = 0
 
-        let totalSize = Int64(bom.totalSize())
-        let fileCount = Int(bom.fileCount())
+        for metadata in paths.values {
+            guard let size = metadata[Constants.fileSizeKey] as? NSNumber else {
+                continue
+            }
+            totalSize += size.int64Value
+            fileCount += 1
+        }
 
         return (totalSize, fileCount)
     }
 
-    /// Get all files from package BOM
-    /// - Parameters:
-    ///   - receipt: PKReceipt object
-    ///   - installLocation: Install prefix path
-    /// - Returns: Array of absolute file paths
-    static func getPackageFiles(receipt: PKReceipt, installLocation: String) -> [String] {
-        guard let enumerator = receipt._directoryEnumerator() as? NSEnumerator else {
+    static func getPackageFiles(receipt: PackageReceipt, installLocation: String) -> [String] {
+        guard let result = run(
+            arguments: [
+                "--volume", receipt.volume,
+                "--only-files",
+                "--files", receipt.packageIdentifier
+            ]
+        ), result.terminationStatus == Constants.successfulTerminationStatus,
+           let output = String(data: result.data, encoding: .utf8) else {
             return []
         }
 
-        var files: [String] = []
-        let prefixPath = installLocation.hasSuffix("/") ? installLocation : installLocation + "/"
+        let installRoot = URL(fileURLWithPath: installLocation, isDirectory: true)
 
-        while let path = enumerator.nextObject() as? String {
-            // Build absolute path
-            let absolutePath: String
-            if path.hasPrefix("/") {
-                absolutePath = path
-            } else {
-                absolutePath = prefixPath + path
+        return output
+            .split(whereSeparator: \.isNewline)
+            .map(String.init)
+            .filter { !$0.isEmpty && !$0.contains("._") }
+            .map { relativePath in
+                if relativePath.hasPrefix("/") {
+                    return URL(fileURLWithPath: relativePath).standardizedFileURL.path
+                }
+                return installRoot
+                    .appendingPathComponent(relativePath)
+                    .standardizedFileURL
+                    .path
             }
-
-            // Filter out Apple resource fork files
-            if !absolutePath.contains("._") {
-                files.append(absolutePath)
-            }
-        }
-
-        return files
     }
 
-    /// Find BOM file path for a receipt
-    /// - Parameter receipt: PKReceipt object
-    /// - Returns: BOM file path or nil if not found
-    private static func findBOMPath(for receipt: PKReceipt) -> String? {
-        guard let receiptPaths = receipt.receiptStoragePaths() as? [String] else {
+    @discardableResult
+    static func forgetPackage(identifier: String, volume: String = Constants.defaultVolume) -> Bool {
+        guard let result = run(arguments: ["--volume", volume, "--forget", identifier]) else {
+            return false
+        }
+        return result.terminationStatus == Constants.successfulTerminationStatus
+    }
+
+    static func getPackageGroups(receipt: PackageReceipt) -> [String] {
+        packageInfoDictionary(for: receipt)?[Constants.groupsKey] as? [String] ?? []
+    }
+
+    private static func packageInfoDictionary(for receipt: PackageReceipt) -> [String: Any]? {
+        guard let result = run(
+            arguments: ["--volume", receipt.volume, "--pkg-info-plist", receipt.packageIdentifier]
+        ), result.terminationStatus == Constants.successfulTerminationStatus,
+           let propertyList = try? PropertyListSerialization.propertyList(
+               from: result.data,
+               options: [],
+               format: nil
+           ) else {
             return nil
         }
 
-        // Find .bom file in receipt storage paths
-        return receiptPaths.first(where: { $0.hasSuffix(".bom") })
+        return propertyList as? [String: Any]
     }
 
-    // MARK: - Package Removal
-
-    /// Get all receipt file paths that need to be deleted to forget a package
-    /// - Parameter receipt: PKReceipt object
-    /// - Returns: Array of file paths to delete
-    static func getReceiptFilePaths(for receipt: PKReceipt) -> [String] {
-        return (receipt.receiptStoragePaths() as? [String]) ?? []
-    }
-
-    // MARK: - Helpers
-
-    /// Format install date from PKReceipt
-    /// - Parameter date: Date object from receipt
-    /// - Returns: Formatted date string or Unix timestamp
-    private static func formatInstallDate(_ date: Any?) -> String {
-        if let date = date as? Date {
-            return String(Int(date.timeIntervalSince1970))
+    private static func formatInstallDate(_ value: Any?) -> String {
+        guard let timestamp = value as? NSNumber else {
+            return ""
         }
-        return ""
+        return String(timestamp.int64Value)
     }
 
-    /// Check if a package is secure/signed
-    /// - Parameter receipt: PKReceipt object
-    /// - Returns: True if package is secure
-    static func isPackageSecure(receipt: PKReceipt) -> Bool {
-        return receipt._isSecure()
-    }
+    private static func run(arguments: [String]) -> CommandResult? {
+        let process = Process()
+        let outputPipe = Pipe()
 
-    /// Get package groups
-    /// - Parameter receipt: PKReceipt object
-    /// - Returns: Array of group identifiers
-    static func getPackageGroups(receipt: PKReceipt) -> [String] {
-        return (receipt.packageGroups() as? [String]) ?? []
+        process.executableURL = URL(fileURLWithPath: Constants.executablePath)
+        process.arguments = arguments
+        process.standardOutput = outputPipe
+        process.standardError = FileHandle.nullDevice
+
+        do {
+            try process.run()
+            let data = outputPipe.fileHandleForReading.readDataToEndOfFile()
+            process.waitUntilExit()
+            return CommandResult(data: data, terminationStatus: process.terminationStatus)
+        } catch {
+            return nil
+        }
     }
 }

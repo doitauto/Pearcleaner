@@ -6,8 +6,6 @@
 //
 
 import Foundation
-import CommerceKit
-import StoreFoundation
 import AlinFoundation
 
 class AppStoreUpdateChecker {

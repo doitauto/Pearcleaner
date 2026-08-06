@@ -39,10 +39,9 @@ struct PackageInfo: Identifiable, Hashable, Equatable {
     let installLocation: String
     var bomFilesLoaded: Bool = false
 
-    // NEW: Additional metadata from private PKG APIs
+    // Additional metadata from macOS Installer receipts
     let packageGroups: [String]           // Groups this package belongs to
     let additionalInfo: String            // Extra package information
-    let isSecure: Bool                    // Whether package is signed/secure
     let receiptStoragePaths: [String]     // All receipt file paths
     let totalSizeFromBOM: Int64           // Total installed size from BOM
     let totalFilesInBOM: Int              // Total file count from BOM
@@ -327,7 +326,7 @@ struct PackageView: View {
 
                     // Get all receipts to find the one matching this package ID
                     let receipts = PKGManager.getAllPackages(volume: "/")
-                    guard let receipt = receipts.first(where: { ($0.packageIdentifier() as? String) == packageId }) else {
+                    guard let receipt = receipts.first(where: { $0.packageIdentifier == packageId }) else {
                         continuation.resume(returning: [])
                         return
                     }
@@ -370,7 +369,7 @@ struct PackageView: View {
         return await withCheckedContinuation { continuation in
             DispatchQueue.global(qos: .userInitiated).async {
                 if #available(macOS 10.5, *) {
-                    // Use private PKG API to get all receipts
+                    // Query installed receipts through the public pkgutil interface.
                     let receipts = PKGManager.getAllPackages(volume: "/")
 
                     // Convert receipts to PackageInfo objects
@@ -430,18 +429,7 @@ struct PackageView: View {
                     }
                 }
 
-                // Get receipt file paths to delete directly (no shell command needed)
-                let receiptPaths = package.receiptStoragePaths
-
-                if receiptPaths.isEmpty {
-//                    printOS("⚠️ No receipt paths found for package \(package.packageName)")
-                    continuation.resume(returning: false)
-                    return
-                }
-
-                // Use FileManagerUndo to safely delete receipt files to trash
-                let receiptURLs = receiptPaths.map { URL(fileURLWithPath: $0) }
-                let success = FileManagerUndo.shared.deleteFiles(at: receiptURLs, bundleName: "PKG-\(package.packageName)")
+                let success = PKGManager.forgetPackage(identifier: package.packageId)
 
                 if !success {
                     printOS("Failed to forget package.")
@@ -601,21 +589,12 @@ struct PackageView: View {
             }
         }
 
-        // Step 2: Delete receipt files (must use privileged commands as they're system files)
+        // Step 2: Forget the receipt through the public Installer interface.
         let receiptsSuccess = await withCheckedContinuation { continuation in
             DispatchQueue.global(qos: .userInitiated).async {
-                let receiptPaths = package.receiptStoragePaths
-
-                guard !receiptPaths.isEmpty else {
-                    continuation.resume(returning: true)
-                    return
-                }
-
-                // Use FileManagerUndo to safely delete receipt files to trash
-                let receiptURLs = receiptPaths.map { URL(fileURLWithPath: $0) }
-                let success = FileManagerUndo.shared.deleteFiles(at: receiptURLs, bundleName: "PKG-\(package.packageId)")
-
-                continuation.resume(returning: success)
+                continuation.resume(
+                    returning: PKGManager.forgetPackage(identifier: package.packageId)
+                )
             }
         }
 
@@ -710,27 +689,6 @@ struct PackageRowView: View {
                                 .font(.headline)
                                 .foregroundStyle(ThemeColors.shared(for: colorScheme).primaryText)
                                 .lineLimit(1)
-                        }
-
-                        // Security badge
-                        if package.isSecure {
-                            HStack(spacing: 2) {
-                                Image(systemName: "lock.fill")
-                                    .font(.caption2)
-                                Text("Secure")
-                                    .font(.caption2)
-                            }
-                            .foregroundStyle(.green)
-                            .help("This package is signed and verified. The package was cryptographically signed by the developer and its integrity has been verified.")
-                        } else {
-                            HStack(spacing: 2) {
-                                Image(systemName: "exclamationmark.triangle")
-                                    .font(.caption2)
-                                Text("Unsigned")
-                                    .font(.caption2)
-                            }
-                            .foregroundStyle(.orange)
-                            .help("This package is unsigned or unverified. The package was not cryptographically signed, or its signature could not be verified.")
                         }
 
                         Spacer()
@@ -1627,4 +1585,3 @@ struct PackageUninstallSheet: View {
         }
     }
 }
-
