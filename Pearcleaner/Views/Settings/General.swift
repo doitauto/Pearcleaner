@@ -19,13 +19,11 @@ struct GeneralSettingsTab: View {
     @AppStorage("settings.general.brew") private var brew: Bool = false
     @AppStorage("settings.general.oneshot") private var oneShotMode: Bool = false
     @AppStorage("settings.general.confirmAlert") private var confirmAlert: Bool = false
-    @AppStorage("settings.general.cli") private var isCLISymlinked = false
     @AppStorage("settings.general.namesearchstrict") private var nameSearchStrict = false
     @AppStorage("settings.general.spotlight") private var spotlight = false
     @AppStorage("settings.general.searchSensitivity") private var sensitivityLevel: SearchSensitivityLevel = .strict
     @AppStorage("settings.general.deepLevelAlertShown") private var deepLevelAlertShown: Bool = false
     @AppStorage("settings.general.searchTextContent") private var searchTextContent: Bool = false
-    @AppStorage("settings.updater.loadOnStartup") private var loadUpdatesOnStartup: Bool = true
     @AppStorage("settings.general.sudoCacheTimeout") private var sudoCacheTimeoutData: Data = {
         let defaultTimeout = SudoCacheTimeout()
         return (try? JSONEncoder().encode(defaultTimeout)) ?? Data()
@@ -119,30 +117,6 @@ struct GeneralSettingsTab: View {
 
 
                         HStack(spacing: 0) {
-                            Image(systemName: "arrow.down.circle")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 15, height: 15)
-                                .padding(.trailing)
-                                .foregroundStyle(ThemeColors.shared(for: colorScheme).primaryText)
-                            VStack(alignment: .leading, spacing: 5) {
-                                Text("Load app updates on startup")
-                                    .font(.callout)
-                                    .foregroundStyle(ThemeColors.shared(for: colorScheme).primaryText)
-                            }
-
-                            InfoButton(text: String(localized: "When enabled, AppRinse will automatically scan for app updates in the background during launch. This way, updates are ready when you open the Updater view."))
-
-                            Spacer()
-                            Toggle(isOn: $loadUpdatesOnStartup, label: {
-                            })
-                            .toggleStyle(SettingsToggle())
-                        }
-                        .padding(5)
-
-
-
-                        HStack(spacing: 0) {
                             Image(systemName: "key.fill")
                                 .resizable()
                                 .scaledToFit()
@@ -154,7 +128,7 @@ struct GeneralSettingsTab: View {
                                     Text("Password cache timeout")
                                         .font(.callout)
                                         .foregroundStyle(ThemeColors.shared(for: colorScheme).primaryText)
-                                    InfoButton(text: String(localized: "When running privileged Homebrew operations, AppRinse caches your password in the macOS Keychain for this duration to avoid repeated password prompts. Homebrew commands cannot be executed with the privileged helper tool AppRinse offers."))
+                                    InfoButton(text: String(localized: "When running privileged Homebrew operations, AppRinse caches your password in the macOS Keychain for this duration to avoid repeated password prompts."))
                                 }
                             }
 
@@ -409,69 +383,10 @@ struct GeneralSettingsTab: View {
 
                 })
 
-            // === CLI ==========================================================================================================
-            PearGroupBox(
-                header: { Text("Command Line").foregroundStyle(ThemeColors.shared(for: colorScheme).primaryText).font(.title2) },
-                content: {
-                    VStack {
-                        HStack(spacing: 0) {
-                            Image(systemName: "terminal")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 15, height: 15)
-                                .padding(.trailing)
-                                .foregroundStyle(ThemeColors.shared(for: colorScheme).primaryText)
-                            VStack {
-
-                                HStack {
-                                    Text("AppRinse CLI support")
-                                        .font(.callout)
-                                        .foregroundStyle(ThemeColors.shared(for: colorScheme).primaryText)
-                                    InfoButton(text: String(localized: "Enabling the CLI will allow you to execute AppRinse actions from Terminal. This adds the apprinse command to /usr/local/bin so it is available directly from your PATH. Try it after enabling:\n\n> apprinse --help"))
-                                    Spacer()
-                                }
-
-
-                                if !HelperToolManager.shared.isHelperToolInstalled {
-                                    HStack {
-                                        Text("Helper tool needs to be enabled")
-                                            .foregroundStyle(Color.red)
-                                            .font(.footnote)
-                                        Spacer()
-                                    }
-
-                                }
-                            }
-
-
-
-
-
-                            Spacer()
-
-                            Toggle(isOn: $isCLISymlinked, label: {
-                            })
-                            .toggleStyle(SettingsToggle())
-                            .onChange(of: isCLISymlinked) { newValue in
-                                if newValue {
-                                    manageSymlink(install: true)
-                                } else {
-                                    manageSymlink(install: false)
-                                }
-                            }
-
-                        }
-                    }
-
-                    .padding(5)
-                })
-
         }
         .onAppear {
             Task {
                 appState.updateExtensionStatus()
-                fixLegacySymlink()
-                isCLISymlinked = checkCLISymlink()
             }
 
             // Load sudo cache timeout from AppStorage

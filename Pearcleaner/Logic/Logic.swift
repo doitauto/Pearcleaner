@@ -121,8 +121,6 @@ func loadAppsAsync(folderPaths: [String], useStreaming: Bool = false) async {
 /// - Parameter useStreaming: If true, uses two-phase streaming (AppInfoMini → full AppInfo). If false, loads full AppInfo immediately.
 /// - Returns: Array of AppInfo. Empty if streaming (results delivered via AppState updates), populated if not streaming.
 func getSortedApps(paths: [String], useStreaming: Bool = false) -> [AppInfo] {
-    @AppStorage("settings.updater.loadOnStartup") var loadUpdatesOnStartup: Bool = true
-
     let fileManager = FileManager.default
     var apps: [URL] = []
 
@@ -277,13 +275,6 @@ func getSortedApps(paths: [String], useStreaming: Bool = false) -> [AppInfo] {
                     }
                 }
 
-                // Notify that all apps are fully loaded with complete AppInfo (if setting enabled)
-                Task { @MainActor in
-                    let loadOnStartup = UserDefaults.standard.object(forKey: "settings.updater.loadOnStartup") as? Bool ?? true
-                    if loadOnStartup {
-                        NotificationCenter.default.post(name: NSNotification.Name("AllAppsFullyLoaded"), object: nil)
-                    }
-                }
             }
         }
 
@@ -326,13 +317,6 @@ func getSortedApps(paths: [String], useStreaming: Bool = false) -> [AppInfo] {
         }
 
         group.wait()
-
-        // Notify that all apps are fully loaded (if setting enabled)
-        Task { @MainActor in
-            if loadUpdatesOnStartup {
-                NotificationCenter.default.post(name: NSNotification.Name("AllAppsFullyLoaded"), object: nil)
-            }
-        }
 
         // Sort alphabetically and return
         return allFullInfos.sorted { $0.appName.sortKey < $1.appName.sortKey }
@@ -1219,42 +1203,6 @@ func exportDebugInfo(appState: AppState) {
         printOS("Folder selection was canceled.")
     }
 }
-
-func exportUpdaterDebugInfo() {
-    let panel = NSOpenPanel()
-    panel.canChooseFiles = false
-    panel.canChooseDirectories = true
-    panel.allowsMultipleSelection = false
-    panel.prompt = "Select Folder"
-
-    if panel.runModal() == .OK, let selectedFolder = panel.url {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd_HH-mm-ss"
-        let timestamp = dateFormatter.string(from: Date())
-        let filename = "UpdaterDebugLog-\(timestamp).txt"
-        let filePath = selectedFolder.appendingPathComponent(filename)
-
-        let systemInfo = getSystemDebugString()
-        let updaterLogs = UpdaterDebugLogger.shared.generateDebugReport()
-        let debugContent = systemInfo + "\n\n" + updaterLogs
-
-        do {
-            try debugContent.write(to: filePath, atomically: true, encoding: .utf8)
-            printOS("Updater debug log saved successfully at \(filePath.path)")
-            // Open Finder and select the file
-            NSWorkspace.shared.selectFile(
-                filePath.path,
-                inFileViewerRootedAtPath: filePath.deletingLastPathComponent().path)
-            // Clear logs after successful export
-            UpdaterDebugLogger.shared.clearLogs()
-        } catch {
-            printOS("Error saving updater debug log: \(error)")
-        }
-    } else {
-        printOS("Folder selection was canceled.")
-    }
-}
-
 
 // Remove app from cache
 func removeApp(appState: AppState, withPath path: URL) async {

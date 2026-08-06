@@ -12,13 +12,11 @@ import AlinFoundation
 class DeeplinkManager {
     private var urlQueue: [URL] = []
     private var isProcessing = false
-    let updater: Updater
     let fsm: FolderSettingsManager
     @AppStorage("settings.general.oneshot") private var oneShotMode: Bool = false
     @State private var windowController = WindowManager()
 
-    init(updater: Updater, fsm: FolderSettingsManager) {
-        self.updater = updater
+    init(fsm: FolderSettingsManager) {
         self.fsm = fsm
         if AppState.shared.currentPage != .applications {
             updateOnMain {
@@ -35,7 +33,6 @@ class DeeplinkManager {
         static let checkOrphanedFiles = "checkOrphanedFiles"
         static let checkDevEnv = "checkDevEnv"
         static let appLipo = "appLipo"
-        static let checkUpdates = "checkUpdates"
         static let appsPaths = "appsPaths"
         static let orphanedPaths = "orphanedPaths"
         static let refreshAppsList = "refreshAppsList"
@@ -49,7 +46,6 @@ class DeeplinkManager {
             checkOrphanedFiles,
             checkDevEnv,
             appLipo,
-            checkUpdates,
             appsPaths,
             orphanedPaths,
             refreshAppsList,
@@ -221,11 +217,11 @@ class DeeplinkManager {
                 let search = page.lowercased()
                 let allPages = CurrentTabView.allCases
                 if let matchedPage = allPages.first(where: { $0.title.lowercased().contains(search) }) {
-                    openAppSettingsWindow(tab: matchedPage, updater: updater)
+                    openAppSettingsWindow(tab: matchedPage)
                 }
             } else {
                 // No query parameter - open with saved preference (or general if none saved)
-                openAppSettingsWindow(updater: updater)
+                openAppSettingsWindow()
             }
             break
         case DeepLinkActions.openPermissions:
@@ -248,9 +244,6 @@ class DeeplinkManager {
             break
         case DeepLinkActions.appLipo:
             appState.currentPage = .lipo
-            break
-        case DeepLinkActions.checkUpdates:
-            updater.checkForUpdates(sheet: true)
             break
         case DeepLinkActions.appsPaths:
             if let actionType = queryItems.first(where: { $0.name == "add" || $0.name == "remove" })?.name,

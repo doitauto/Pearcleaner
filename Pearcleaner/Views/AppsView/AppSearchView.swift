@@ -12,7 +12,6 @@ struct AppSearchView: View {
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var locations: Locations
     @EnvironmentObject var fsm: FolderSettingsManager
-    @EnvironmentObject var updater: Updater
     @EnvironmentObject var permissionManager: PermissionManager
     @Environment(\.colorScheme) var colorScheme
     @State private var search: String = ""

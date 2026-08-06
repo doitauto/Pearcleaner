@@ -391,7 +391,7 @@ func killApp(appId: String) async {
 //}
 
 
-func openAppSettingsWindow(tab: CurrentTabView? = nil, updater: Updater) {
+func openAppSettingsWindow(tab: CurrentTabView? = nil) {
     // Determine which tab to open:
     // 1. If caller explicitly passes a tab (not nil), use it and save as new preference
     // 2. Otherwise, check for saved tab preference
@@ -413,7 +413,6 @@ func openAppSettingsWindow(tab: CurrentTabView? = nil, updater: Updater) {
         .environmentObject(AppState.shared)
         .environmentObject(Locations())
         .environmentObject(FolderSettingsManager.shared)
-        .environmentObject(updater)
         .environmentObject(PermissionManager.shared)
         .frame(width: 800, height: 710)
         .navigationTitle("")

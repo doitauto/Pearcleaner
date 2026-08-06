@@ -974,7 +974,6 @@ struct ProgressStepView: View {
 extension View {
     /// Handle file drop operations and route to deeplink manager
     func handleFileDrop(
-        updater: Updater,
         fsm: FolderSettingsManager,
         appState: AppState,
         locations: Locations,
@@ -996,7 +995,7 @@ extension View {
             }
 
             dispatchGroup.notify(queue: .main) {
-                let deeplinkManager = DeeplinkManager(updater: updater, fsm: fsm)
+                let deeplinkManager = DeeplinkManager(fsm: fsm)
                 for url in droppedURLs {
                     deeplinkManager.manage(url: url, appState: appState, locations: locations)
                 }

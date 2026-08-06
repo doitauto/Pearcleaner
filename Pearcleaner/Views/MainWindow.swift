@@ -14,11 +14,9 @@ struct MainWindow: View {
     @ObservedObject private var themeManager = ThemeManager.shared
     @ObservedObject private var consoleManager = GlobalConsoleManager.shared
     @StateObject private var brewManager = HomebrewManager()
-    @StateObject private var updateManager = UpdateManager.shared
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var locations: Locations
     @EnvironmentObject var fsm: FolderSettingsManager
-    @EnvironmentObject var updater: Updater
     @EnvironmentObject var permissionManager: PermissionManagerLocal
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.accessibilityReduceMotion) private var accessibilityReduceMotion
@@ -26,7 +24,6 @@ struct MainWindow: View {
     @AppStorage("settings.general.sidebarWidth") private var sidebarWidth: Double = 265
     @AppStorage("settings.interface.animationEnabled") private var animationEnabled: Bool = true
     @AppStorage("settings.tutorial.switchUtilitiesShown") private var tutorialShown: Bool = true
-    @AppStorage("settings.updater.loadOnStartup") private var loadUpdatesOnStartup: Bool = true
     @AppStorage("settings.console.state") private var consoleStateData: Data = Data()
 
     @State private var isDraggingOver: Bool = false
@@ -36,8 +33,6 @@ struct MainWindow: View {
     @State private var isFullscreen = false
 
     // Badges
-    @State private var showUpdateView = false
-    @State private var showFeatureView = false
     @State private var showPermissionList = false
     @State private var glowRadius = 0.0
 
@@ -94,12 +89,6 @@ struct MainWindow: View {
                         HomebrewView()
                             .environmentObject(brewManager)
 
-                    case .updater:
-                        withConsole {
-                            AppsUpdaterView()
-                                .environmentObject(brewManager)
-                                .environmentObject(updateManager)
-                        }
                     }
                 }
 
@@ -149,7 +138,6 @@ struct MainWindow: View {
 
             // Badge overlay (unified overlay for all badge notifications)
             BadgeOverlay()
-                .environmentObject(updater)
                 .zIndex(100)
 
         }
@@ -161,19 +149,14 @@ struct MainWindow: View {
         .frame(minWidth: 900, minHeight: 650)
         .handlesExternalEvents(preferring: Set(arrayLiteral: "apprinse"), allowing: Set(arrayLiteral: "*"))
         .handleFileDrop(
-            updater: updater,
             fsm: fsm,
             appState: appState,
             locations: locations,
             isTargeted: $isDraggingOver
         )
         .onOpenURL(perform: { url in
-            let deeplinkManager = DeeplinkManager(updater: updater, fsm: fsm)
+            let deeplinkManager = DeeplinkManager(fsm: fsm)
             deeplinkManager.manage(url: url, appState: appState, locations: locations)
-        })
-        .sheet(isPresented: $updater.sheet, content: {
-            /// This will show the update sheet based on the frequency check function only
-            updater.getUpdateView()
         })
         .sheet(isPresented: $appState.showDeleteHistory, content: {
             DeleteHistoryView()
@@ -242,30 +225,7 @@ struct MainWindow: View {
                     .buttonStyle(.plain)
                 }
 
-                // Notice Icons
-                if updater.updateAvailable {
-                    noticeButton(
-                        image: "icloud.and.arrow.down.fill",
-                        color: .green,
-                        help: "Update Available"
-                    ) {
-                        showUpdateView.toggle()
-                    }
-                    .sheet(isPresented: $showUpdateView) {
-                        updater.getUpdateView()
-                    }
-                } else if updater.announcementAvailable {
-                    noticeButton(
-                        image: "sparkles.2",
-                        color: .purple,
-                        help: "New Feature"
-                    ) {
-                        showFeatureView.toggle()
-                    }
-                    .sheet(isPresented: $showFeatureView) {
-                        updater.getAnnouncementView()
-                    }
-                } else if permissionManager.shouldShowPermissionWarning {
+                if permissionManager.shouldShowPermissionWarning {
                     noticeButton(
                         image: "lock.slash.fill",
                         color: .red,
@@ -275,14 +235,6 @@ struct MainWindow: View {
                     }
                     .sheet(isPresented: $showPermissionList) {
                         PermissionsSheetView()
-                    }
-                } else if HelperToolManager.shared.shouldShowHelperBadge {
-                    noticeButton(
-                        image: "gear",
-                        color: .orange,
-                        help: "Helper Not Installed"
-                    ) {
-                        openAppSettingsWindow(tab: .helper, updater: updater)
                     }
                 }
 
@@ -316,7 +268,7 @@ struct MainWindow: View {
     private var utilitySwitcher: some View {
         Menu {
             Section("Essentials") {
-                utilityMenuItems([.applications, .orphans, .updater])
+                utilityMenuItems([.applications, .orphans])
             }
 
             Section("System") {
@@ -342,19 +294,6 @@ struct MainWindow: View {
                     .font(.callout.weight(.semibold))
                     .foregroundStyle(ThemeColors.shared(for: colorScheme).primaryText)
 
-                if updateManager.totalUpdateCount > 0 {
-                    Text(updateManager.totalUpdateCount, format: .number)
-                        .font(.caption2.weight(.bold))
-                        .monospacedDigit()
-                        .foregroundStyle(.white)
-                        .padding(.horizontal, 6)
-                        .frame(minHeight: 18)
-                        .background(.red, in: Capsule(style: .continuous))
-                        .accessibilityLabel(
-                            Text("\(updateManager.totalUpdateCount) updates available")
-                        )
-                }
-
                 Image(systemName: "chevron.down")
                     .font(.caption2.weight(.semibold))
                     .foregroundStyle(ThemeColors.shared(for: colorScheme).secondaryText)
@@ -374,11 +313,7 @@ struct MainWindow: View {
                 selectUtility(page)
             } label: {
                 Label {
-                    if page == .updater && (loadUpdatesOnStartup || updateManager.totalUpdateCount > 0) {
-                        Text("\(page.title) (\(updateManager.totalUpdateCount))")
-                    } else {
-                        Text(page.title)
-                    }
+                    Text(page.title)
                 } icon: {
                     Image(systemName: page.icon)
                 }

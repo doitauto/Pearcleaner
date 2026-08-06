@@ -686,7 +686,6 @@ enum CurrentPage: Int, CaseIterable, Identifiable {
     case packages
     case plugins
     case services
-    case updater
 
     var id: Int { rawValue }
 
@@ -728,8 +727,6 @@ enum CurrentPage: Int, CaseIterable, Identifiable {
             return (String(localized: "Plugins"), "puzzlepiece")
         case .services:
             return (String(localized: "Services"), "gearshape.2")
-        case .updater:
-            return (String(localized: "Updater"), "arrow.down.circle")
         }
     }
 
@@ -785,20 +782,16 @@ enum SortOptionList: String, CaseIterable {
 }
 
 enum CurrentTabView: Int, CaseIterable {
-    case general
-    case interface
-    case folders
-    case update
-    case helper
-    case about
+    case general = 0
+    case interface = 1
+    case folders = 2
+    case about = 5
 
     var title: String {
         switch self {
         case .general: return String(localized: "General")
         case .interface: return String(localized: "Interface")
         case .folders: return String(localized: "Folders")
-        case .update: return String(localized: "Update")
-        case .helper: return String(localized: "Helper")
         case .about: return String(localized: "About")
         }
     }

@@ -13,17 +13,13 @@ struct AppCommands: Commands {
     let appState: AppState
     let locations: Locations
     let fsm: FolderSettingsManager
-    let updater: Updater
     @AppStorage("settings.interface.animationEnabled") private var animationEnabled: Bool = true
-    @AppStorage("settings.general.selectedTab") private var selectedTab: CurrentTabView = .general
     @State private var windowController = WindowManager()
-    @ObservedObject private var debugLogger = UpdaterDebugLogger.shared
 
-    init(appState: AppState, locations: Locations, fsm: FolderSettingsManager, updater: Updater) {
+    init(appState: AppState, locations: Locations, fsm: FolderSettingsManager) {
         self.appState = appState
         self.locations = locations
         self.fsm = fsm
-        self.updater = updater
     }
 
     var body: some Commands {
@@ -32,7 +28,7 @@ struct AppCommands: Commands {
         CommandGroup(replacing: .appInfo) {
 
             Button {
-                openAppSettingsWindow(tab: .about, updater: updater)
+                openAppSettingsWindow(tab: .about)
             } label: {
                 Label("About \(Bundle.main.name)", systemImage: "info.circle.fill")
             }
@@ -40,18 +36,11 @@ struct AppCommands: Commands {
             Divider()
 
             Button {
-                openAppSettingsWindow(updater: updater)
+                openAppSettingsWindow()
             } label: {
                 Label("Settings", systemImage: "gearshape")
             }
             .keyboardShortcut(",", modifiers: .command)
-
-            Button {
-                updater.checkForUpdates(sheet: true, force: true)
-            } label: {
-                Label("Check for Updates", systemImage: "tray.and.arrow.down.fill")
-            }
-            .keyboardShortcut("u", modifiers: .command)
 
             Button {
                 showCustomAlert(
@@ -209,15 +198,6 @@ struct AppCommands: Commands {
                 }
                 .keyboardShortcut("9", modifiers: .command)
 
-                Button
-                {
-                    appState.currentPage = .updater
-
-                } label: {
-                    Text("Updater")
-                }
-                .keyboardShortcut("0", modifiers: .command)
-
             } label: {
                 Label("Navigate To", systemImage: "location.north.fill")
             }
@@ -265,8 +245,6 @@ struct AppCommands: Commands {
                         NotificationCenter.default.post(name: NSNotification.Name("PluginsViewShouldRefresh"), object: nil)
                     case .services:
                         NotificationCenter.default.post(name: NSNotification.Name("DaemonViewShouldRefresh"), object: nil)
-                    case .updater:
-                        NotificationCenter.default.post(name: NSNotification.Name("UpdaterViewShouldRefresh"), object: nil)
                     }
                 }
             } label: {
@@ -327,17 +305,6 @@ struct AppCommands: Commands {
                 Label("Export Debug Info...", systemImage: "info.circle")
             }
             .keyboardShortcut("i", modifiers: [.command, .shift])
-
-            // Updater debug log export (only visible on Updater page)
-            if appState.currentPage == .updater {
-                Button {
-                    exportUpdaterDebugInfo()
-                } label: {
-                    Label("Export Updater Debug Log...", systemImage: "arrow.triangle.2.circlepath.circle")
-                }
-                .keyboardShortcut("u", modifiers: [.command, .shift])
-                .disabled(!debugLogger.hasLogs)
-            }
 
             Divider()
 
