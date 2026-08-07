@@ -962,7 +962,6 @@
 				INFOPLIST_KEY_CFBundleDisplayName = AppRinse;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				INFOPLIST_KEY_NSSystemAdministrationUsageDescription = "AppRinse requires full disk access to delete files in protected locations";
 				INFOPLIST_KEY_NSSystemExtensionUsageDescription = "AppRinse requires this permission for the Finder extension";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1017,7 +1016,6 @@
 				INFOPLIST_KEY_CFBundleDisplayName = AppRinse;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				INFOPLIST_KEY_NSSystemAdministrationUsageDescription = "AppRinse requires full disk access to delete files in protected locations";
 				INFOPLIST_KEY_NSSystemExtensionUsageDescription = "AppRinse requires this permission for the Finder extension";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

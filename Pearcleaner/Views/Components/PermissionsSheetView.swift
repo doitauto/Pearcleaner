@@ -173,6 +173,13 @@ struct PermissionsSheetView: View {
         .frame(width: 300)
         .background(ThemeColors.shared(for: colorScheme).primaryBG)
         .cornerRadius(12)
+        .onAppear {
+            guard permissionManager.results == nil else { return }
+
+            permissionManager.checkPermissions(types: [.fullDiskAccess]) { results in
+                permissionManager.results = results
+            }
+        }
     }
 
     private func permissionName(for permission: PermissionManagerLocal.PermissionType) -> String {

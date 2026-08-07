@@ -1303,6 +1303,12 @@ func uninstallPearcleaner(appState: AppState, locations: Locations) {
 
 // --- Load Plist file with SMAppService ---
 func launchctl(load: Bool, completion: @escaping () -> Void = {}) {
+    #if APP_STORE_SANDBOX
+    // The Mac App Store build does not install background launch agents.
+    completion()
+    return
+    #endif
+
     let service = SMAppService.agent(plistName: "com.doitauto.AppRinseSentinel.plist")
 
     if load {

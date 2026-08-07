@@ -23,8 +23,11 @@ struct PearcleanerApp: App {
         //MARK: GUI or CLI launch mode.
         handleLaunchMode()
 
-        //MARK: Initialize password request handler for SUDO_ASKPASS IPC
+        // The App Store build must never install a password-request listener at launch.
+        // The standalone CLI build may still use SUDO_ASKPASS when explicitly invoked.
+        #if !APP_STORE_SANDBOX
         _ = PasswordRequestHandler.shared
+        #endif
 
         //MARK: Pre-load apps data during app initialization (use streaming for fast initial load)
         let folderPaths = FolderSettingsManager.shared.folderPaths
@@ -69,10 +72,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         // Register as services provider (required for NSServices to work)
         NSApp.servicesProvider = self
 
-        // Check permissions once at launch
-        PermissionManagerLocal.shared.checkPermissions(types: [.fullDiskAccess]) { results in
-            PermissionManagerLocal.shared.results = results
-        }
+        // Permission status is checked only after the user opens the Permissions view.
+        // This keeps launch free of permission or administration prompts.
 
         // Load and cleanup undo history
         Task { @MainActor in

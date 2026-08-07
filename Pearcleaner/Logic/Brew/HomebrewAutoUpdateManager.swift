@@ -118,16 +118,8 @@ class HomebrewAutoUpdateManager: ObservableObject {
             originalSchedules = preservedSchedules
         }
 
-        // Auto-register agent if enabled with schedules but not running
-        if isEnabled && !schedules.isEmpty && !isAgentLoaded {
-            Task {
-                do {
-                    try applySchedule()
-                } catch {
-                    printOS("Failed to auto-register LaunchAgent on launch: \(error)")
-                }
-            }
-        }
+        // LaunchAgents are registered only after an explicit user action in the
+        // Auto Update settings. Never register one while the app is launching.
     }
 
     // MARK: - Public Methods
