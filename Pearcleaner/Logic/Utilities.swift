@@ -12,6 +12,12 @@ import AppKit
 import AudioToolbox
 import OpenDirectory
 
+#if APP_STORE_SANDBOX
+let appStoreDestructiveOperationsEnabled = false
+#else
+let appStoreDestructiveOperationsEnabled = true
+#endif
+
 func ifOSBelow(macOS major: Int, _ minor: Int = 0, _ patch: Int = 0) -> Bool {
     if !ProcessInfo.processInfo.isOperatingSystemAtLeast(
         OperatingSystemVersion(majorVersion: major, minorVersion: minor, patchVersion: patch)

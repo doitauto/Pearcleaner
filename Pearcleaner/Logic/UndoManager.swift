@@ -61,6 +61,11 @@ class FileManagerUndo {
     }
 
     func deleteFiles(at urls: [URL], isCLI: Bool = false, bundleName: String? = nil) -> Bool {
+        guard appStoreDestructiveOperationsEnabled else {
+            printOS("File removal is unavailable in the Mac App Store version.")
+            return false
+        }
+
         // Filter out invalid/dangerous paths before deletion
         let validURLs = urls.filter { validatePath($0.path) }
 
@@ -175,6 +180,11 @@ class FileManagerUndo {
     }
 
     func restoreFiles(filePairs: [(trashURL: URL, originalURL: URL)], isCLI: Bool = false) -> Bool {
+        guard appStoreDestructiveOperationsEnabled else {
+            printOS("File restoration is unavailable in the Mac App Store version.")
+            return false
+        }
+
         let dispatchSemaphore = DispatchSemaphore(value: 0)
         var finalStatus = true
 

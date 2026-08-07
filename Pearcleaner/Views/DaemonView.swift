@@ -580,11 +580,13 @@ struct DaemonView: View {
             parseStatusOutput(userResult.1, into: &statusMap, context: "user")
         }
         
+        #if !APP_STORE_SANDBOX
         // Get system context services (requires sudo for full access)
         let systemResult = runDirectShellCommand(command: "sudo launchctl list")
         if systemResult.0 {
             parseStatusOutput(systemResult.1, into: &statusMap, context: "system")
         }
+        #endif
         
         return statusMap
     }
@@ -960,6 +962,14 @@ struct LaunchItemRowView: View {
     }
     
     private func executeLaunchctlCommand(_ action: String) {
+        #if APP_STORE_SANDBOX
+        GlobalConsoleManager.shared.appendOutput(
+            "System service changes are unavailable in the Mac App Store version.\n",
+            source: CurrentPage.services.title
+        )
+        return
+        #endif
+
         isPerformingAction = true
 
         Task {
@@ -1078,4 +1088,3 @@ private func runDirectShellCommand(command: String) -> (Bool, String) {
     
     return (task.terminationStatus == 0, output)
 }
-

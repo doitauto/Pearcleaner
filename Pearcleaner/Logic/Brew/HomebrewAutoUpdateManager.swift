@@ -137,6 +137,11 @@ class HomebrewAutoUpdateManager: ObservableObject {
 
     /// Toggle the entire schedule on/off
     func toggleEnabled(_ enabled: Bool) throws {
+        guard appStoreDestructiveOperationsEnabled else {
+            isEnabled = false
+            throw HomebrewAutoUpdateError.unavailableInAppStore
+        }
+
         let fileManager = FileManager.default
 
         if enabled {
@@ -257,6 +262,10 @@ class HomebrewAutoUpdateManager: ObservableObject {
 
     /// Apply current schedules by generating plist and registering LaunchAgent
     func applySchedule() throws {
+        guard appStoreDestructiveOperationsEnabled else {
+            throw HomebrewAutoUpdateError.unavailableInAppStore
+        }
+
         // Don't apply if master toggle is disabled
         guard isEnabled else {
             return
@@ -609,8 +618,6 @@ class HomebrewAutoUpdateManager: ObservableObject {
             <dict>
                 <key>PATH</key>
                 <string>\(HomebrewController.shared.getBrewPrefix())/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
-                <key>SUDO_ASKPASS</key>
-                <string>\(Bundle.main.bundlePath)/Contents/Resources/askpass.sh</string>
             </dict>
             <key>RunAtLoad</key>
             <false/>
@@ -627,6 +634,7 @@ class HomebrewAutoUpdateManager: ObservableObject {
 // MARK: - Error Types
 
 enum HomebrewAutoUpdateError: LocalizedError {
+    case unavailableInAppStore
     case invalidEncoding
     case invalidFormat(String)
     case fileWriteFailed
@@ -634,6 +642,8 @@ enum HomebrewAutoUpdateError: LocalizedError {
 
     var errorDescription: String? {
         switch self {
+        case .unavailableInAppStore:
+            return "Automatic Homebrew updates are unavailable in the Mac App Store version."
         case .invalidEncoding:
             return "Failed to encode plist content"
         case .invalidFormat(let details):

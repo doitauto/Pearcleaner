@@ -102,7 +102,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 6;
 			files = (
-				C7575D392B0182DE006A600A /* AppRinseSentinel in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,7 +111,6 @@
 			dstPath = Contents/Library/LaunchAgents;
 			dstSubfolderSpec = 1;
 			files = (
-				C73545FD2D84E5DD00A3DC0C /* com.doitauto.AppRinseSentinel.plist in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -576,7 +574,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C770B6ED2E78DF9D005A0ABD /* Glass.icon in Resources */,
-				C739C3382EB027A9003639C6 /* askpass.sh in Resources */,
 				C74206E52E79E47400BDDB6A /* Assets.xcassets in Resources */,
 				C7F8436B2CBF066F00E3E30A /* Localizable.xcstrings in Resources */,
 			);
@@ -610,7 +607,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "set -e\n\nAPP_PATH=\"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}\"\nchmod +x \"${APP_PATH}/Contents/Resources/askpass.sh\"\n";
+			shellScript = "set -e\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

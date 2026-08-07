@@ -310,6 +310,10 @@ class HomebrewController: ObservableObject {
     }
 
     func runBrewCommand(_ arguments: [String]) async throws -> (output: String, error: String) {
+        guard appStoreDestructiveOperationsEnabled else {
+            return ("", "Homebrew operations are unavailable in the Mac App Store version.")
+        }
+
         // Mark operation as running - explicitly trigger SwiftUI update
         await MainActor.run {
             objectWillChange.send()
@@ -321,11 +325,13 @@ class HomebrewController: ObservableObject {
         process.executableURL = URL(fileURLWithPath: brewPath)
         process.arguments = arguments
 
-        // Set up environment with SUDO_ASKPASS for password prompts during install/update
+        #if !APP_STORE_SANDBOX
+        // Set up environment with SUDO_ASKPASS for standalone builds only.
         var environment = ProcessInfo.processInfo.userEnvironment
         let askpassPath = "\(Bundle.main.bundlePath)/Contents/Resources/askpass.sh"
         environment["SUDO_ASKPASS"] = askpassPath
         process.environment = environment
+        #endif
 
         let outputPipe = Pipe()
         let errorPipe = Pipe()

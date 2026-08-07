@@ -557,6 +557,10 @@ func reloadAppsList(
 // Process CLI // ========================================================================================================
 
 func handleLaunchMode() {
+    #if APP_STORE_SANDBOX
+    // The Mac App Store build is GUI-only and never handles privileged CLI commands.
+    return
+    #else
     var arguments = CommandLine.arguments
     // Filter out arguments that break CLI commands on startup
     arguments = arguments.filter {
@@ -593,6 +597,7 @@ func handleLaunchMode() {
             PearCLI.exit(withError: error)  // Cli exit
         }
     }
+    #endif
 
 }
 
